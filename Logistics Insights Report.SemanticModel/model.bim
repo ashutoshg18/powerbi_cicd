@@ -1,0 +1,860 @@
+{
+  "compatibilityLevel": 1550,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.139.2054.0 (24.12)+334ca1c95b576cc53924655643b0d36f21caac55"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"Base File\",\"city_target_passanger_rating\",\"dim_city\",\"dim_date\",\"dim_repeat_trip_distribution\",\"fact_passanger_summary\",\"fact_trips\",\"monthly_target_new_passanger\",\"monthly_target_trips\"]"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "expressions": [
+      {
+        "name": "Base File",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Folder.Files(\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\")",
+          "in",
+          "    Source"
+        ],
+        "kind": "m",
+        "lineageTag": "0f08a2b9-2be4-4457-8cfb-dd812455f5fc"
+      }
+    ],
+    "relationships": [
+      {
+        "name": "AutoDetected_c02ba0fd-a836-4ccb-bca5-34a5a194a1de",
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "city_id",
+        "fromTable": "dim_city",
+        "toColumn": "city_id",
+        "toTable": "city_target_passanger_rating"
+      },
+      {
+        "name": "AutoDetected_a442a26c-eb55-4b59-b95c-df21053c0d48",
+        "fromColumn": "city_id",
+        "fromTable": "dim_repeat_trip_distribution",
+        "toColumn": "city_id",
+        "toTable": "city_target_passanger_rating"
+      },
+      {
+        "name": "AutoDetected_7c1edb9a-5124-4cef-818c-b46ec97eaa83",
+        "fromColumn": "city_id",
+        "fromTable": "fact_passanger_summary",
+        "toColumn": "city_id",
+        "toTable": "city_target_passanger_rating"
+      },
+      {
+        "name": "AutoDetected_a46fde94-48e8-40f1-ad90-1fd9245ca804",
+        "fromColumn": "city_id",
+        "fromTable": "fact_trips",
+        "toColumn": "city_id",
+        "toTable": "city_target_passanger_rating"
+      },
+      {
+        "name": "AutoDetected_a4f102c1-2ce3-471d-9e84-e308b3b78e92",
+        "fromColumn": "city_id",
+        "fromTable": "monthly_target_new_passanger",
+        "toColumn": "city_id",
+        "toTable": "city_target_passanger_rating"
+      },
+      {
+        "name": "AutoDetected_6fc4c823-bc17-4faa-9c5e-05177f048da5",
+        "fromColumn": "city_id",
+        "fromTable": "monthly_target_trips",
+        "toColumn": "city_id",
+        "toTable": "city_target_passanger_rating"
+      },
+      {
+        "name": "063c8966-361d-3f3e-c696-a0be99d2f241",
+        "fromColumn": "date",
+        "fromTable": "fact_trips",
+        "toColumn": "date",
+        "toTable": "dim_date"
+      },
+      {
+        "name": "db5e7c69-2a26-6847-3fd0-c999f433911f",
+        "fromColumn": "month",
+        "fromTable": "fact_passanger_summary",
+        "toColumn": "date",
+        "toTable": "dim_date"
+      }
+    ],
+    "sourceQueryCulture": "en-IN",
+    "tables": [
+      {
+        "name": "city_target_passanger_rating",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "city_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "96705c80-b026-4bc4-808e-7a5b276ba9c6",
+            "sourceColumn": "city_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "target_avg_passenger_rating",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "6ed75510-0eda-4d53-85b3-f31cbff21331",
+            "sourceColumn": "target_avg_passenger_rating",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "29cf5385-6a8a-40e3-a65c-1b14628a3c38",
+        "partitions": [
+          {
+            "name": "city_target_passanger_rating",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = #\"Base File\",",
+                "    #\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_city_target_passenger_rating csv\" = Source{[#\"Folder Path\"=\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\\",Name=\"city_target_passenger_rating.csv\"]}[Content],",
+                "    #\"Imported CSV\" = Csv.Document(#\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_city_target_passenger_rating csv\",[Delimiter=\",\", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Imported CSV\", [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"city_id\", type text}, {\"target_avg_passenger_rating\", type number}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_city",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "city_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d7490de3-f3a3-40a7-a90c-547ff5748567",
+            "sourceColumn": "city_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "city_name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d9cdbc64-f1b7-4fd8-90be-37d6e35ba674",
+            "sourceColumn": "city_name",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "44d2ff01-7ed6-4c90-8b45-4d8a1bbb37d9",
+        "partitions": [
+          {
+            "name": "dim_city",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = #\"Base File\",",
+                "    #\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_dim_city csv\" = Source{[#\"Folder Path\"=\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\\",Name=\"dim_city.csv\"]}[Content],",
+                "    #\"Imported CSV\" = Csv.Document(#\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_dim_city csv\",[Delimiter=\",\", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Imported CSV\",{{\"Column1\", type text}, {\"Column2\", type text}}),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Changed Type\", [PromoteAllScalars=true]),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"city_id\", type text}, {\"city_name\", type text}})",
+                "in",
+                "    #\"Changed Type1\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_date",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "25132456-f044-4011-a2dd-372076408569",
+            "sourceColumn": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "start_of_month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "d37bc41e-b4fb-4c5f-acce-2359d3c6d2d0",
+            "sourceColumn": "start_of_month",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "month_name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "58515ff1-2f22-4953-a652-35456562f3a5",
+            "sourceColumn": "month_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "day_type",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "759e1fa9-c027-4815-827b-d0274edd7979",
+            "sourceColumn": "day_type",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "24cc97eb-21a2-4fe5-907d-1e71ee44658a",
+        "partitions": [
+          {
+            "name": "dim_date",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = #\"Base File\",",
+                "    #\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_dim_date csv\" = Source{[#\"Folder Path\"=\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\\",Name=\"dim_date.csv\"]}[Content],",
+                "    #\"Imported CSV\" = Csv.Document(#\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_dim_date csv\",[Delimiter=\",\", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Imported CSV\", [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"date\", type date}, {\"start_of_month\", type date}, {\"month_name\", type text}, {\"day_type\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_repeat_trip_distribution",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "4a63377c-c044-4519-be1c-e013345c510f",
+            "sourceColumn": "month",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "city_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f2effea5-dae5-4652-989f-8d73e3d3456d",
+            "sourceColumn": "city_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "trip_count",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c362d65c-5df9-43f2-ad03-a3e760543203",
+            "sourceColumn": "trip_count",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "repeat_passenger_count",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "3af975e5-b051-4879-b115-6eba343a77a0",
+            "sourceColumn": "repeat_passenger_count",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "d08e841e-3d39-44bc-8b08-90e9a112b090",
+        "partitions": [
+          {
+            "name": "dim_repeat_trip_distribution",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = #\"Base File\",",
+                "    #\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_dim_repeat_trip_distribution csv\" = Source{[#\"Folder Path\"=\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\\",Name=\"dim_repeat_trip_distribution.csv\"]}[Content],",
+                "    #\"Imported CSV\" = Csv.Document(#\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_dim_repeat_trip_distribution csv\",[Delimiter=\",\", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Imported CSV\", [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"month\", type date}, {\"city_id\", type text}, {\"trip_count\", type text}, {\"repeat_passenger_count\", Int64.Type}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_passanger_summary",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "3778527c-ee0a-4b75-8a10-61ee1306983b",
+            "sourceColumn": "month",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "city_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "323958df-9fb4-49b6-ba99-4dbafeaa3a57",
+            "sourceColumn": "city_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "new_passengers",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "ddb363b5-a12d-41a3-96c5-20f968a47a9e",
+            "sourceColumn": "new_passengers",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "repeat_passengers",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "ba43bf4a-c737-421d-b0e8-7b2c648b71dc",
+            "sourceColumn": "repeat_passengers",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "total_passengers",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "ea7ccef4-a628-41a6-9d13-f98f2ff67542",
+            "sourceColumn": "total_passengers",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "19019c48-1960-4e18-af23-5f82cfdf804e",
+        "partitions": [
+          {
+            "name": "fact_passanger_summary",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = #\"Base File\",",
+                "    #\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_fact_passenger_summary csv\" = Source{[#\"Folder Path\"=\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\\",Name=\"fact_passenger_summary.csv\"]}[Content],",
+                "    #\"Imported CSV\" = Csv.Document(#\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_fact_passenger_summary csv\",[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Imported CSV\", [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"month\", type date}, {\"city_id\", type text}, {\"new_passengers\", Int64.Type}, {\"repeat_passengers\", Int64.Type}, {\"total_passengers\", Int64.Type}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_trips",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "trip_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5b10cc7e-c731-44e5-a40e-59b7adf7858a",
+            "sourceColumn": "trip_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "b2534e85-68ca-4b31-bec0-44e57d81a1c2",
+            "sourceColumn": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "city_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a7e83984-86f2-40e7-a69f-23eb32266bcf",
+            "sourceColumn": "city_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "passenger_type",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b3e40824-bcdb-463a-93ed-a78ccf10edf4",
+            "sourceColumn": "passenger_type",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "distance_travelled(km)",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "8cca61c2-cd4a-4a28-89c9-53e8383144ff",
+            "sourceColumn": "distance_travelled(km)",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "fare_amount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "ca7c51bc-dc3f-43eb-b859-f25d16936221",
+            "sourceColumn": "fare_amount",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "passenger_rating",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "bd3d5869-63c3-41ed-894b-2e3c0e82ea68",
+            "sourceColumn": "passenger_rating",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "driver_rating",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "aaf6648c-6eac-4582-9658-26aeefa3c65a",
+            "sourceColumn": "driver_rating",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "07d1c498-15f6-40fc-9afc-997e97a13b44",
+        "partitions": [
+          {
+            "name": "fact_trips",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = #\"Base File\",",
+                "    #\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_fact_trips csv\" = Source{[#\"Folder Path\"=\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\\",Name=\"fact_trips.csv\"]}[Content],",
+                "    #\"Imported CSV\" = Csv.Document(#\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_fact_trips csv\",[Delimiter=\",\", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Imported CSV\", [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"trip_id\", type text}, {\"date\", type date}, {\"city_id\", type text}, {\"passenger_type\", type text}, {\"distance_travelled(km)\", Int64.Type}, {\"fare_amount\", Int64.Type}, {\"passenger_rating\", Int64.Type}, {\"driver_rating\", Int64.Type}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "monthly_target_new_passanger",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "94198d81-639c-4307-93d3-00ab54ff37d0",
+            "sourceColumn": "month",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "city_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6cfdb179-1895-42d6-aa1f-a58219af24c5",
+            "sourceColumn": "city_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "target_new_passengers",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "10c3695a-1734-490c-b0fe-fbf7223475ca",
+            "sourceColumn": "target_new_passengers",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "008d19c1-12f5-479d-a2b4-91b911027b91",
+        "partitions": [
+          {
+            "name": "monthly_target_new_passanger",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = #\"Base File\",",
+                "    #\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_monthly_target_new_passengers csv\" = Source{[#\"Folder Path\"=\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\\",Name=\"monthly_target_new_passengers.csv\"]}[Content],",
+                "    #\"Imported CSV\" = Csv.Document(#\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_monthly_target_new_passengers csv\",[Delimiter=\",\", Columns=3, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Imported CSV\", [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"month\", type date}, {\"city_id\", type text}, {\"target_new_passengers\", Int64.Type}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "monthly_target_trips",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "acbd57fb-1052-48db-ae6e-be0636582131",
+            "sourceColumn": "month",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "city_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "13c2398b-2b0b-49cd-9a35-a79f1f1ecb1a",
+            "sourceColumn": "city_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "total_target_trips",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "7ae1cb90-2e08-4244-be3d-cbc39f10f16e",
+            "sourceColumn": "total_target_trips",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "8ba54123-ec51-4469-8b94-4a26a02e2974",
+        "partitions": [
+          {
+            "name": "monthly_target_trips",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = #\"Base File\",",
+                "    #\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_monthly_target_trips csv\" = Source{[#\"Folder Path\"=\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\\",Name=\"monthly_target_trips.csv\"]}[Content],",
+                "    #\"Imported CSV\" = Csv.Document(#\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_monthly_target_trips csv\",[Delimiter=\",\", Columns=3, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Imported CSV\", [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"month\", type date}, {\"city_id\", type text}, {\"total_target_trips\", Int64.Type}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

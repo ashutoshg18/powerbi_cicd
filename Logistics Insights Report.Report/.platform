@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Logistics Insights Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "070d17e1-f27e-4718-b5b9-679ed3185025"
+  }
+}
