@@ -1,5 +1,5 @@
 {
-  "compatibilityLevel": 1550,
+  "compatibilityLevel": 1567,
   "model": {
     "annotations": [
       {
@@ -12,7 +12,7 @@
       },
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"Base File\",\"city_target_passanger_rating\",\"dim_city\",\"dim_date\",\"dim_repeat_trip_distribution\",\"fact_passanger_summary\",\"fact_trips\",\"monthly_target_new_passanger\",\"monthly_target_trips\"]"
+        "value": "[\"Base File\",\"city_target_passanger_rating\",\"dim_city\",\"dim_date\",\"dim_repeat_trip_distribution\",\"fact_passanger_summary\",\"fact_trips\",\"monthly_target_new_passanger\",\"monthly_target_trips\",\"Measure Table\"]"
       },
       {
         "name": "PBI_ProTooling",
@@ -849,6 +849,88 @@
                 "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"month\", type date}, {\"city_id\", type text}, {\"total_target_trips\", Int64.Type}})",
                 "in",
                 "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Measure Table",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "changedProperties": [
+          {
+            "property": "Name"
+          }
+        ],
+        "lineageTag": "46d5ee80-2e9f-457b-b018-21ef305b9b4b",
+        "measures": [
+          {
+            "name": "Total Trips",
+            "expression": "COUNTROWS(fact_trips)",
+            "formatString": "0",
+            "lineageTag": "61d5e67a-838e-4b5c-9afd-6560fc91f203"
+          },
+          {
+            "name": "Average Fare",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "AVERAGE(fact_trips[fare_amount])"
+            ],
+            "lineageTag": "40aab6e9-12de-44da-a905-b9e40b4f1563"
+          },
+          {
+            "name": "Average Distance",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "AVERAGE(fact_trips[distance_travelled(km)])"
+            ],
+            "lineageTag": "54bd1201-8db4-46c6-a8da-841a6ac94adb"
+          },
+          {
+            "name": "Average Fare/ Trip",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "DIVIDE([Average Fare], [Average Distance])"
+            ],
+            "lineageTag": "f8a40848-eff5-4980-90ee-0b396e273e3a"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Measure Table",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i44FAA==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type\",{\"Column1\"})",
+                "in",
+                "    #\"Removed Columns\""
               ],
               "type": "m"
             }
