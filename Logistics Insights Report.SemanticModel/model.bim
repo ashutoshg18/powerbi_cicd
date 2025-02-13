@@ -877,7 +877,7 @@
             "lineageTag": "61d5e67a-838e-4b5c-9afd-6560fc91f203"
           },
           {
-            "name": "Average Fare",
+            "name": "Average Fare/ trip",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
@@ -905,7 +905,7 @@
             "lineageTag": "54bd1201-8db4-46c6-a8da-841a6ac94adb"
           },
           {
-            "name": "Average Fare/ Trip",
+            "name": "Average Fare/ km distance",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
@@ -914,7 +914,7 @@
             ],
             "expression": [
               "",
-              "DIVIDE([Average Fare], [Average Distance])"
+              "DIVIDE([Average Fare/ trip], [Average Distance])"
             ],
             "lineageTag": "f8a40848-eff5-4980-90ee-0b396e273e3a"
           },
