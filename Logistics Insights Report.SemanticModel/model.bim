@@ -917,6 +917,34 @@
               "DIVIDE([Average Fare], [Average Distance])"
             ],
             "lineageTag": "f8a40848-eff5-4980-90ee-0b396e273e3a"
+          },
+          {
+            "name": "Average Passenger Rating",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "AVERAGE(fact_trips[passenger_rating])"
+            ],
+            "lineageTag": "825f3732-4627-45e7-88bd-9587fe6fd0b6"
+          },
+          {
+            "name": "Average Driver Rating",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "AVERAGE(fact_trips[driver_rating])"
+            ],
+            "lineageTag": "8356b258-1b84-424c-96f6-bab63d1c2afd"
           }
         ],
         "partitions": [
