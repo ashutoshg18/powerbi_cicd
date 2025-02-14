@@ -931,7 +931,7 @@
             "lineageTag": "54bd1201-8db4-46c6-a8da-841a6ac94adb"
           },
           {
-            "name": "Average Fare/ km distance",
+            "name": "Average Fare/ km",
             "annotations": [
               {
                 "name": "PBI_FormatHint",
