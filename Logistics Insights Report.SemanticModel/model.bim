@@ -398,8 +398,14 @@
                 "value": "Automatic"
               }
             ],
+            "changedProperties": [
+              {
+                "property": "SortByColumn"
+              }
+            ],
             "dataType": "string",
             "lineageTag": "c362d65c-5df9-43f2-ad03-a3e760543203",
+            "sortByColumn": "Sort Order",
             "sourceColumn": "trip_count",
             "summarizeBy": "none"
           },
@@ -416,6 +422,20 @@
             "lineageTag": "3af975e5-b051-4879-b115-6eba343a77a0",
             "sourceColumn": "repeat_passenger_count",
             "summarizeBy": "sum"
+          },
+          {
+            "name": "Sort Order",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "06ead859-f483-47c0-96ad-9c6899d1a54b",
+            "sourceColumn": "Sort Order",
+            "summarizeBy": "sum"
           }
         ],
         "lineageTag": "d08e841e-3d39-44bc-8b08-90e9a112b090",
@@ -430,9 +450,15 @@
                 "    #\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_dim_repeat_trip_distribution csv\" = Source{[#\"Folder Path\"=\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\\",Name=\"dim_repeat_trip_distribution.csv\"]}[Content],",
                 "    #\"Imported CSV\" = Csv.Document(#\"D:\\Portfolio DA\\PBI Projects\\Misc & Competition\\RPC13_Input_For_Participants\\RPC13_Input_For_Participants\\datasets\\csv_files\\_dim_repeat_trip_distribution csv\",[Delimiter=\",\", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
                 "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Imported CSV\", [PromoteAllScalars=true]),",
-                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"month\", type date}, {\"city_id\", type text}, {\"trip_count\", type text}, {\"repeat_passenger_count\", Int64.Type}})",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"month\", type date}, {\"city_id\", type text}, {\"trip_count\", type text}, {\"repeat_passenger_count\", Int64.Type}}),",
+                "    #\"Duplicated Column\" = Table.DuplicateColumn(#\"Changed Type\", \"trip_count\", \"trip_count - Copy\"),",
+                "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Duplicated Column\", \"trip_count - Copy\", Splitter.SplitTextByEachDelimiter({\"-\"}, QuoteStyle.Csv, false), {\"trip_count - Copy.1\", \"trip_count - Copy.2\"}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Split Column by Delimiter\",{{\"trip_count - Copy.1\", Int64.Type}, {\"trip_count - Copy.2\", type text}}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type1\",{\"trip_count - Copy.2\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Removed Columns\",{{\"trip_count - Copy.1\", \"Sort Order\"}}),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Renamed Columns\",{{\"Sort Order\", Int64.Type}})",
                 "in",
-                "    #\"Changed Type\""
+                "    #\"Changed Type2\""
               ],
               "type": "m"
             }
@@ -945,6 +971,33 @@
               "AVERAGE(fact_trips[driver_rating])"
             ],
             "lineageTag": "8356b258-1b84-424c-96f6-bab63d1c2afd"
+          },
+          {
+            "name": "Repeat Passanger count",
+            "expression": [
+              "",
+              "SUM(dim_repeat_trip_distribution[repeat_passenger_count])"
+            ],
+            "formatString": "0",
+            "lineageTag": "d7fde0cb-347c-4814-9368-cd0643ac392b"
+          },
+          {
+            "name": "Total Repeat Passenger",
+            "expression": [
+              "",
+              "CALCULATE(SUM(fact_passanger_summary[repeat_passengers]),ALL(fact_passanger_summary))"
+            ],
+            "formatString": "0",
+            "lineageTag": "ebe7437b-d6ad-488c-984b-619ab91558eb"
+          },
+          {
+            "name": "Repeat Passenger %",
+            "expression": [
+              "",
+              "DIVIDE([Repeat Passanger count],[Total Repeat Passenger],0)"
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "lineageTag": "2abeae02-a7fe-488c-b457-f20cd3696b6a"
           }
         ],
         "partitions": [
