@@ -306,8 +306,14 @@
                 "value": "Automatic"
               }
             ],
+            "changedProperties": [
+              {
+                "property": "SortByColumn"
+              }
+            ],
             "dataType": "string",
             "lineageTag": "58515ff1-2f22-4953-a652-35456562f3a5",
+            "sortByColumn": "start_of_month",
             "sourceColumn": "month_name",
             "summarizeBy": "none"
           },
@@ -982,7 +988,7 @@
             "lineageTag": "d7fde0cb-347c-4814-9368-cd0643ac392b"
           },
           {
-            "name": "Total Repeat Passenger",
+            "name": "Total Repeat Passenger No filter",
             "expression": [
               "",
               "CALCULATE(SUM(fact_passanger_summary[repeat_passengers]),ALL(fact_passanger_summary))"
@@ -994,10 +1000,87 @@
             "name": "Repeat Passenger %",
             "expression": [
               "",
-              "DIVIDE([Repeat Passanger count],[Total Repeat Passenger],0)"
+              "DIVIDE([Repeat Passanger count],[Total Repeat Passenger No filter],0)"
             ],
             "formatString": "0.00%;-0.00%;0.00%",
             "lineageTag": "2abeae02-a7fe-488c-b457-f20cd3696b6a"
+          },
+          {
+            "name": "Target Trips",
+            "expression": [
+              "",
+              "SUM(monthly_target_trips[total_target_trips])"
+            ],
+            "formatString": "0",
+            "lineageTag": "3ece3c4c-2302-4666-9f9b-12cbdf3b8db6"
+          },
+          {
+            "name": "Target Passenger Rating",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "AVERAGE(city_target_passanger_rating[target_avg_passenger_rating])"
+            ],
+            "lineageTag": "5191e69e-010a-4f8e-aada-4973ebe25b93"
+          },
+          {
+            "name": "Trip % Difference",
+            "expression": [
+              "",
+              "DIVIDE([Total Trips] - [Target Trips], [Target Trips],\"-\")"
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "lineageTag": "c17776c8-5cd6-462c-a698-960e565b70ea"
+          },
+          {
+            "name": "New Passenger % Difference",
+            "expression": [
+              "",
+              "CALCULATE(DIVIDE([Average Passenger Rating] - [Target Passenger Rating], [Target Passenger Rating], \"-\"), fact_trips[passenger_type] = \"new\")"
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "lineageTag": "61f77ce5-4ddf-4f5a-80eb-ed65e20ec86e"
+          },
+          {
+            "name": "Repeat Passenger % Difference",
+            "expression": [
+              "",
+              "CALCULATE(DIVIDE([Average Passenger Rating] - [Target Passenger Rating], [Target Passenger Rating], \"-\"), fact_trips[passenger_type] = \"repeated\")"
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "lineageTag": "1f168cd8-f277-4e47-99f5-22e7d36bb5a8"
+          },
+          {
+            "name": "Total Passenger",
+            "expression": [
+              "",
+              "SUM(fact_passanger_summary[total_passengers])"
+            ],
+            "formatString": "0",
+            "lineageTag": "346d67d5-f142-46a8-a6c7-7a3ef713525a"
+          },
+          {
+            "name": "Total Repeat Passenger",
+            "expression": [
+              "",
+              "CALCULATE(SUM(fact_passanger_summary[repeat_passengers]))"
+            ],
+            "formatString": "0",
+            "lineageTag": "d9192c2a-05aa-481a-b230-e6ac580035ef"
+          },
+          {
+            "name": "RPR %",
+            "expression": [
+              "",
+              "DIVIDE([Total Repeat Passenger],[Total Passenger],\"-\")"
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "lineageTag": "8552711e-16c3-4e23-bc65-2913bc0fb62d"
           }
         ],
         "partitions": [
