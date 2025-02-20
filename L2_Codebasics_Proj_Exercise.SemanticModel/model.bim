@@ -1,0 +1,350 @@
+{
+  "compatibilityLevel": 1550,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.139.2054.0 (24.12)+334ca1c95b576cc53924655643b0d36f21caac55"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"Dim_employee\",\"fact_reimbursement\"]"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "relationships": [
+      {
+        "name": "AutoDetected_3c95fc9b-6c0e-4fbb-8fb7-99ed834da337",
+        "fromColumn": "Employee_ID",
+        "fromTable": "fact_reimbursement",
+        "toColumn": "Employee_ID",
+        "toTable": "Dim_employee"
+      }
+    ],
+    "sourceQueryCulture": "en-IN",
+    "tables": [
+      {
+        "name": "Dim_employee",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Employee_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "877df90b-436f-4fef-807f-de62bbe7c639",
+            "sourceColumn": "Employee_ID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "201b36ac-4b33-43e9-8bc5-0e0118c4f407",
+            "sourceColumn": "Name",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "903b41c5-d8ca-44bd-97b3-484d47c97089",
+        "partitions": [
+          {
+            "name": "Dim_employee",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Excel.Workbook(File.Contents(\"D:\\Portfolio DA\\Codebasics DA Bootcamp\\Power BI\\Chapter_2_inputs\\Chapter_2_inputs\\Employee_reimbursement_dataset.xlsx\"), null, true),",
+                "    Dim_employee_Sheet = Source{[Item=\"Dim_employee\",Kind=\"Sheet\"]}[Data],",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Dim_employee_Sheet, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Employee_ID\", Int64.Type}, {\"Name\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_reimbursement",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Request_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "8c3442e7-63cb-4eb8-8e07-8d768eae4b5c",
+            "sourceColumn": "Request_ID",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "Employee_ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "91588b9c-f4e0-48f7-be28-e095a9450048",
+            "sourceColumn": "Employee_ID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Expense_type",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "01e76a34-839d-4773-b384-7789b1a9b3c7",
+            "sourceColumn": "Expense_type",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Currency",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e65cb08e-1f3f-4bd9-a185-2a80d01d3a8c",
+            "sourceColumn": "Currency",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Amount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "0e7d53da-cc66-45ea-be1f-7e1fca11f67d",
+            "sourceColumn": "Amount",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Expense_Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "0148e105-8794-4b13-b539-44193bd39000",
+            "sourceColumn": "Expense_Date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Project_Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d3b6a92e-f550-4642-aeac-d720f8f1e3be",
+            "sourceColumn": "Project_Name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Approval_Status",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9125b6a7-06e1-4eb3-b822-fbafd84794c6",
+            "sourceColumn": "Approval_Status",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Approval_Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "3e90c00f-1c74-437f-81a2-0770c8ee423a",
+            "sourceColumn": "Approval_Date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Currency_New",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f0826978-e04e-4cbf-8238-7ed67e9f2383",
+            "sourceColumn": "Currency_New",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Amount_INR",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "41a64d04-63b8-45cf-aee0-e0fae7b7861c",
+            "sourceColumn": "Amount_INR",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "9fe34416-4411-472a-a90f-727060ad996e",
+        "measures": [
+          {
+            "name": "Reimbursed Amount",
+            "expression": [
+              "",
+              "SUM(fact_reimbursement[Amount_INR])",
+              ""
+            ],
+            "formatString": "0",
+            "lineageTag": "afb5fcb2-9b7f-440c-9955-bad256829c84"
+          },
+          {
+            "name": "Reimbursement Proj_B",
+            "expression": [
+              "",
+              "CALCULATE( ",
+              "    [Reimbursed Amount],",
+              "    fact_reimbursement[Project_Name] = \"Project_B\"",
+              ")"
+            ],
+            "formatString": "0",
+            "lineageTag": "36e3fe1b-f2c1-4183-b693-83a3be9ceffc"
+          },
+          {
+            "name": "Declined Req",
+            "expression": [
+              "",
+              "CALCULATE(COUNT(fact_reimbursement[Request_ID]), fact_reimbursement[Approval_Status] = \"Declined\")"
+            ],
+            "formatString": "0",
+            "lineageTag": "909c6217-5da6-45dd-9096-924eb5a5cc3a"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "fact_reimbursement",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Excel.Workbook(File.Contents(\"D:\\Portfolio DA\\Codebasics DA Bootcamp\\Power BI\\Chapter_2_inputs\\Chapter_2_inputs\\Employee_reimbursement_dataset.xlsx\"), null, true),",
+                "    fact_reimbursement_Sheet = Source{[Item=\"fact_reimbursement\",Kind=\"Sheet\"]}[Data],",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(fact_reimbursement_Sheet, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Request_ID\", Int64.Type}, {\"Employee_ID\", Int64.Type}, {\"Expense_type\", type text}, {\"Currency\", type text}, {\"Amount\", Int64.Type}, {\"Expense_Date\", type date}, {\"Project_Name\", type text}, {\"Approval_Status\", type text}, {\"Approval_Date\", type date}}),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Changed Type\",\".Miscellaneous\",\"Miscellaneous\",Replacer.ReplaceValue,{\"Expense_type\"}),",
+                "    #\"Replaced Value1\" = Table.ReplaceValue(#\"Replaced Value\",\"TRANsporTAation\",\"Transportation\",Replacer.ReplaceValue,{\"Expense_type\"}),",
+                "    #\"Trimmed Text\" = Table.TransformColumns(#\"Replaced Value1\",{{\"Expense_type\", Text.Trim, type text}}),",
+                "    #\"Replaced Value2\" = Table.ReplaceValue(#\"Trimmed Text\",\"ProjectA\",\"Project_A\",Replacer.ReplaceValue,{\"Project_Name\"}),",
+                "    #\"Replaced Value3\" = Table.ReplaceValue(#\"Replaced Value2\",\"ProjectB_\",\"Project_B\",Replacer.ReplaceValue,{\"Project_Name\"}),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Replaced Value3\", \"Currency_New\", each if [Currency] = null and [Amount] >= 1000 then \"INR\"",
+                "else if [Currency] = null and [Amount] < 1000 then \"USD\"",
+                "else [Currency]),",
+                "    #\"Added Custom1\" = Table.AddColumn(#\"Added Custom\", \"Amount_INR\", each if [Currency_New] = \"USD\" then [Amount] * 85",
+                "else if [Currency_New] = \"EURO\" then [Amount] * 90",
+                "else [Amount]),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Added Custom1\",{{\"Amount_INR\", Int64.Type}})",
+                "in",
+                "    #\"Changed Type1\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
