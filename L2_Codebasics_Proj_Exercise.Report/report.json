@@ -1,0 +1,96 @@
+{
+  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.61\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU10",
+            "path": "BaseThemes/CY24SU10.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "6daa2dd64639746c6079",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"1212e0e9071523adc066\",\"layouts\":[{\"id\":0,\"position\":{\"x\":673.0786516853932,\"y\":0,\"z\":0,\"width\":288,\"height\":193.07865168539325}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"fact_reimbursement.Reimbursed Amount\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_reimbursement\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Reimbursed Amount\"},\"Name\":\"fact_reimbursement.Reimbursed Amount\",\"NativeReferenceName\":\"Reimbursed Amount\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Reimbursed Amount\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 193.08,
+          "width": 288.00,
+          "x": 673.08,
+          "y": 0.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"3995890da432ed3c1e91\",\"layouts\":[{\"id\":0,\"position\":{\"x\":4.277360066833751,\"y\":336.84210526315786,\"z\":5,\"width\":571.0275689223057,\"height\":254.50292397660817}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Dim_employee.Employee_ID\",\"active\":true}],\"Y\":[{\"queryRef\":\"fact_reimbursement.Reimbursed Amount\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Dim_employee\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"fact_reimbursement\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Employee_ID\"},\"Name\":\"Dim_employee.Employee_ID\",\"NativeReferenceName\":\"Employee_ID\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Reimbursed Amount\"},\"Name\":\"fact_reimbursement.Reimbursed Amount\",\"NativeReferenceName\":\"Reimbursed Amount\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Reimbursed Amount\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 254.50,
+          "width": 571.03,
+          "x": 4.28,
+          "y": 336.84,
+          "z": 5.00
+        },
+        {
+          "config": "{\"name\":\"47ac7b0a559accbb0c98\",\"layouts\":[{\"id\":0,\"position\":{\"x\":976.1797752808989,\"y\":0,\"z\":1,\"width\":304.17977528089887,\"height\":193.07865168539325}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"fact_reimbursement.Reimbursement Proj_B\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_reimbursement\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Reimbursement Proj_B\"},\"Name\":\"fact_reimbursement.Reimbursement Proj_B\",\"NativeReferenceName\":\"Reimbursement Proj_B\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Reimbursement Proj_B\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 193.08,
+          "width": 304.18,
+          "x": 976.18,
+          "y": 0.00,
+          "z": 1.00
+        },
+        {
+          "config": "{\"name\":\"5cbbde502cef5b3f7b9a\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":4,\"width\":325.07936507936506,\"height\":149.70760233918128}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"fact_reimbursement.Project_Name\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_reimbursement\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Project_Name\"},\"Name\":\"fact_reimbursement.Project_Name\",\"NativeReferenceName\":\"Project_Name\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{}}]}}}",
+          "filters": "[]",
+          "height": 149.71,
+          "width": 325.08,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 4.00
+        },
+        {
+          "config": "{\"name\":\"da9bd507665a1786f5d2\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":149.70760233918128,\"z\":3,\"width\":325.07936507936506,\"height\":136.87552213868003}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Dim_employee.Employee_ID\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Dim_employee\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Employee_ID\"},\"Name\":\"Dim_employee.Employee_ID\",\"NativeReferenceName\":\"Employee_ID\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{\"orientation\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"titleWrap\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"background\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"border\":[{\"properties\":{\"width\":{\"expr\":{\"Literal\":{\"Value\":\"1D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 136.88,
+          "width": 325.08,
+          "x": 0.00,
+          "y": 149.71,
+          "z": 3.00
+        },
+        {
+          "config": "{\"name\":\"e289244d6560996e1010\",\"layouts\":[{\"id\":0,\"position\":{\"x\":672.6148705096074,\"y\":344.32748538011697,\"z\":6,\"width\":607.3851294903926,\"height\":375.3383458646616,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"pieChart\",\"projections\":{\"Category\":[{\"queryRef\":\"fact_reimbursement.Project_Name\",\"active\":true}],\"Y\":[{\"queryRef\":\"fact_reimbursement.Reimbursed Amount\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_reimbursement\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Project_Name\"},\"Name\":\"fact_reimbursement.Project_Name\",\"NativeReferenceName\":\"Project_Name\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Reimbursed Amount\"},\"Name\":\"fact_reimbursement.Reimbursed Amount\",\"NativeReferenceName\":\"Reimbursed Amount\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Reimbursed Amount\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 375.34,
+          "width": 607.39,
+          "x": 672.61,
+          "y": 344.33,
+          "z": 6.00
+        },
+        {
+          "config": "{\"name\":\"e80977f80417994782d3\",\"layouts\":[{\"id\":0,\"position\":{\"x\":347.3258426966292,\"y\":0,\"z\":2,\"width\":325.75280898876406,\"height\":193.07865168539325}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"fact_reimbursement.Declined Req\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_reimbursement\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Declined Req\"},\"Name\":\"fact_reimbursement.Declined Req\",\"NativeReferenceName\":\"Declined Req\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Declined Req\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
+          "filters": "[]",
+          "height": 193.08,
+          "width": 325.75,
+          "x": 347.33,
+          "y": 0.00,
+          "z": 2.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}
