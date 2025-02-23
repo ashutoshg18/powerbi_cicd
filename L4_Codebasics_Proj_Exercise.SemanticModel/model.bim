@@ -1,0 +1,398 @@
+{
+  "compatibilityLevel": 1550,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.139.2054.0 (24.12)+334ca1c95b576cc53924655643b0d36f21caac55"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"dim_stores\",\"fact_sales_Iphone14\",\"fact_sales_Iphone15\",\"Measures_\"]"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "relationships": [
+      {
+        "name": "AutoDetected_db4972df-27b9-4db2-9b0c-fb9e9ef9822f",
+        "fromColumn": "store_id",
+        "fromTable": "fact_sales_Iphone14",
+        "toColumn": "store_id",
+        "toTable": "dim_stores"
+      },
+      {
+        "name": "AutoDetected_a5012287-b358-4e78-b796-bad6775e463f",
+        "fromColumn": "store_id",
+        "fromTable": "fact_sales_Iphone15",
+        "toColumn": "store_id",
+        "toTable": "dim_stores"
+      },
+      {
+        "name": "18992149-c517-3b31-6b85-d5c58526a6df",
+        "fromColumn": "Date",
+        "fromTable": "fact_sales_Iphone14",
+        "toColumn": "Date",
+        "toTable": "Dim Date"
+      },
+      {
+        "name": "a3af2ce3-6dcf-f82c-b0f2-f57aae2d646d",
+        "fromColumn": "Date",
+        "fromTable": "fact_sales_Iphone15",
+        "toColumn": "Date",
+        "toTable": "Dim Date"
+      }
+    ],
+    "sourceQueryCulture": "en-IN",
+    "tables": [
+      {
+        "name": "dim_stores",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "store_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "a4c0c4b7-9147-44b8-a2af-2e554957b2fd",
+            "sourceColumn": "store_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "country_name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b7de1104-828b-49ed-b576-812a5d0711fc",
+            "sourceColumn": "country_name",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "ab61a416-2028-40e1-a298-3ca250b2d761",
+        "partitions": [
+          {
+            "name": "dim_stores",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"D:\\Portfolio DA\\Codebasics DA Bootcamp\\Power BI\\4 PBI basics\\Chapter_4_Exercise\\Chapter_4_Exercise_inputs\\dim_stores.csv\"),[Delimiter=\",\", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"store_id\", Int64.Type}, {\"country_name\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_sales_Iphone14",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "store_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "a9d17aa2-1144-4c01-b4f2-752d717efa57",
+            "sourceColumn": "store_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "iphone14",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "dbe65f51-354a-4fbf-ab87-1f31fcd4b7bf",
+            "sourceColumn": "iphone14",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "49a5bc44-0c85-4e63-a64e-5923a07608ec",
+            "sourceColumn": "Date",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "2bbee774-70c6-4d07-8b09-acb040e4d09e",
+        "partitions": [
+          {
+            "name": "fact_sales_Iphone14",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"D:\\Portfolio DA\\Codebasics DA Bootcamp\\Power BI\\4 PBI basics\\Chapter_4_Exercise\\Chapter_4_Exercise_inputs\\fact_sales_Iphone14.csv\"),[Delimiter=\",\", Columns=3, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"month\", type text}, {\"store_id\", Int64.Type}, {\"iphone14\", Int64.Type}}),",
+                "    #\"Added Conditional Column\" = Table.AddColumn(#\"Changed Type\", \"Date\", each if [month] = \"Sep_22\" then #date(2022, 9, 1) else if [month] = \"Oct_22\" then #date(2022, 10, 1) else if [month] = \"Nov_22\" then #date(2022, 11, 1) else null, type text),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Added Conditional Column\",{{\"Date\", type date}}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type1\",{\"month\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_sales_Iphone15",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "store_id",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "b8b52ba6-533a-49a1-8982-101dc9370e23",
+            "sourceColumn": "store_id",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "iphone15",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "c09261db-bb81-46d1-8f58-3ec7bad59e92",
+            "sourceColumn": "iphone15",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "a569c7a8-fbd4-46b2-8672-7c76d3b6e72e",
+            "sourceColumn": "Date",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "78473b71-3ae0-46e9-9a7b-dcf082236535",
+        "partitions": [
+          {
+            "name": "fact_sales_Iphone15",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"D:\\Portfolio DA\\Codebasics DA Bootcamp\\Power BI\\4 PBI basics\\Chapter_4_Exercise\\Chapter_4_Exercise_inputs\\fact_sales_Iphone15.csv\"),[Delimiter=\",\", Columns=3, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"month\", type text}, {\"store_id\", Int64.Type}, {\"iphone15\", Int64.Type}}),",
+                "    #\"Inserted Replaced Text\" = Table.AddColumn(#\"Changed Type\", \"Date\", each Text.Replace([month], \"_\", \" 20\"), type text),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Inserted Replaced Text\",{{\"Date\", type date}}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type1\",{\"month\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Dim Date",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "2e20f6b8640241edbc1e5a5654eb4387"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isDataTypeInferred": true,
+            "isNameInferred": true,
+            "lineageTag": "f571ce6a-8de8-455b-8385-930e434720f3",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "cd262681-eba3-4406-b49a-370b12c379ee",
+        "partitions": [
+          {
+            "name": "Dim Date",
+            "mode": "import",
+            "source": {
+              "expression": "CALENDAR(DATE(2022,9,1),DATE(2023,12,31))",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Measures_",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "lineageTag": "c84d437b-7364-476e-b2de-d33ddfb0d76b",
+        "measures": [
+          {
+            "name": "Iphone 15 Sales",
+            "expression": [
+              "",
+              "SUM(fact_sales_Iphone15[iphone15])"
+            ],
+            "formatString": "0",
+            "lineageTag": "97862500-6f53-4001-9788-2c215d25f977"
+          },
+          {
+            "name": "Iphone 14 Sales",
+            "expression": [
+              "",
+              "SUM(fact_sales_Iphone14[iphone14])"
+            ],
+            "formatString": "0",
+            "lineageTag": "1c8424b6-d39b-4eb1-841a-860bb899dce1"
+          },
+          {
+            "name": "Variance Sales",
+            "expression": [
+              "",
+              "ABS([Iphone 15 Sales]-[Iphone 14 Sales])"
+            ],
+            "formatString": "0",
+            "lineageTag": "cefcf21c-d86f-408d-990c-827d3749e9ff"
+          },
+          {
+            "name": "Variance %",
+            "expression": [
+              "",
+              "DIVIDE([Variance Sales],[Iphone 14 Sales])"
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "lineageTag": "0c0ba86c-4482-4284-99d1-6633d39eb593"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Measures_",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i44FAA==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type\",{\"Column1\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

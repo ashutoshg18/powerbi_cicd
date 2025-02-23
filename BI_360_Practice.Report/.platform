@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "BI_360_Practice"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "653df0db-8834-4e8f-b9a4-2bdb3babe42a"
+  }
+}

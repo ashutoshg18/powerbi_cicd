@@ -1,0 +1,165 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 491.25,
+            "y": 622.5
+          },
+          "nodeIndex": "gdb041 dim_customer",
+          "nodeLineageTag": "b4850d3e-d4ab-4a98-9390-1707638e79dc",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 525.25,
+            "y": 1.5
+          },
+          "nodeIndex": "gdb041 dim_market",
+          "nodeLineageTag": "03dcab6b-441d-4e87-b5ee-470c43be7cbc",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 810.5,
+            "y": 0
+          },
+          "nodeIndex": "gdb041 dim_product",
+          "nodeLineageTag": "7fc6c03a-c081-4fad-81fb-975bea0d4d39",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 824.5,
+            "y": 266.25
+          },
+          "nodeIndex": "gdb041 fact_forecast_monthly",
+          "nodeLineageTag": "3649b44a-841b-4a5b-8aa2-2d422a2775f0",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 830.16666666666652,
+            "y": 610.83333333333337
+          },
+          "nodeIndex": "gdb041 fact_sales_monthly",
+          "nodeLineageTag": "8d8868f0-acd6-4d1b-8d6e-3cc1e3b18030",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 508.75,
+            "y": 398.25
+          },
+          "nodeIndex": "gdb056 freight_cost",
+          "nodeLineageTag": "05204145-bb78-47b7-aa46-84ff83230a10",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 514,
+            "y": 195.25
+          },
+          "nodeIndex": "gdb056 gross_price",
+          "nodeLineageTag": "de333d7c-61fa-4d89-90c1-00b18ec6ddfb",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1094.25,
+            "y": 26.5
+          },
+          "nodeIndex": "gdb056 manufacturing_cost",
+          "nodeLineageTag": "4b914791-9b81-43ee-be6f-a8dee65655c8",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1124.5,
+            "y": 203.75
+          },
+          "nodeIndex": "gdb056 post_invoice_deductions",
+          "nodeLineageTag": "b9c8b53b-c872-4807-83fb-42e22effb122",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1131,
+            "y": 634
+          },
+          "nodeIndex": "gdb056 pre_invoice_deductions",
+          "nodeLineageTag": "9356f65d-11ae-4562-bb1f-078531632982",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 1138.75,
+            "y": 439
+          },
+          "nodeIndex": "Dim_Date",
+          "nodeLineageTag": "9727c909-88ad-4338-80ee-c90fa43313e7",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 10
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 80,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

@@ -1,0 +1,51 @@
+{
+  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.61\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"slowDataSourceSettings\":{\"isCrossHighlightingDisabled\":false,\"isSlicerSelectionsButtonEnabled\":false,\"isFilterSelectionsButtonEnabled\":false,\"isFieldWellButtonEnabled\":false,\"isApplyAllButtonEnabled\":false},\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU10",
+            "path": "BaseThemes/CY24SU10.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "862733ef2a967b1f4bb1",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"8e65d5ef3ac18cbf2941\",\"layouts\":[{\"id\":0,\"position\":{\"x\":377.0602409638554,\"y\":209.34939759036143,\"z\":1,\"width\":593.3493975903614,\"height\":299.56626506024094}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Dim_Date.Fiscal Year\"},{\"queryRef\":\"Sum(gdb041 fact_sales_monthly.sold_quantity)\"},{\"queryRef\":\"Sum(gdb041 fact_forecast_monthly.forecast_quantity)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"g\",\"Entity\":\"gdb041 fact_sales_monthly\",\"Type\":0},{\"Name\":\"d\",\"Entity\":\"Dim_Date\",\"Type\":0},{\"Name\":\"g1\",\"Entity\":\"gdb041 fact_forecast_monthly\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"sold_quantity\"}},\"Function\":0},\"Name\":\"Sum(gdb041 fact_sales_monthly.sold_quantity)\",\"NativeReferenceName\":\"Sum of sold_quantity\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Fiscal Year\"},\"Name\":\"Dim_Date.Fiscal Year\",\"NativeReferenceName\":\"Fiscal Year\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g1\"}},\"Property\":\"forecast_quantity\"}},\"Function\":0},\"Name\":\"Sum(gdb041 fact_forecast_monthly.forecast_quantity)\",\"NativeReferenceName\":\"Sum of forecast_quantity\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 299.57,
+          "width": 593.35,
+          "x": 377.06,
+          "y": 209.35,
+          "z": 1.00
+        },
+        {
+          "config": "{\"name\":\"93aec21a72579489b80b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":0,\"width\":519.3253012048193,\"height\":173.49397590361446}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Dim_Date.Fiscal Year\"},{\"queryRef\":\"gdb041 fact_sales_monthly.product_code\"},{\"queryRef\":\"gdb041 fact_sales_monthly.market\"},{\"queryRef\":\"gdb041 fact_sales_monthly.customer_code\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Dim_Date\",\"Type\":0},{\"Name\":\"g\",\"Entity\":\"gdb041 fact_sales_monthly\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Fiscal Year\"},\"Name\":\"Dim_Date.Fiscal Year\",\"NativeReferenceName\":\"Fiscal Year\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"product_code\"}},\"Function\":2},\"Name\":\"gdb041 fact_sales_monthly.product_code\",\"NativeReferenceName\":\"Count of product_code\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"market\"}},\"Function\":2},\"Name\":\"gdb041 fact_sales_monthly.market\",\"NativeReferenceName\":\"Count of market\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"customer_code\"}},\"Function\":2},\"Name\":\"gdb041 fact_sales_monthly.customer_code\",\"NativeReferenceName\":\"Count of customer_code\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 173.49,
+          "width": 519.33,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}

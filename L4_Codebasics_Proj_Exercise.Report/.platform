@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "L4_Codebasics_Proj_Exercise"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a2ed4e2b-ec98-4c6f-8ef2-f7a9bad6909b"
+  }
+}
