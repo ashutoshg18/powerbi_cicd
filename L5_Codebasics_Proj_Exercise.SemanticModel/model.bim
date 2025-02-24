@@ -1,0 +1,569 @@
+{
+  "compatibilityLevel": 1550,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.139.2054.0 (24.12)+334ca1c95b576cc53924655643b0d36f21caac55"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"dim_date\",\"dim_merchants\",\"fact_transactions_2022\",\"fact_transactions_2023\",\"dim_category\",\"fact_transactions\",\"fact_transactions (2)\"]"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "expressions": [
+      {
+        "name": "fact_transactions_2022",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Csv.Document(File.Contents(\"D:\\Portfolio DA\\Codebasics DA Bootcamp\\Power BI\\5 PBI Power Query\\Chapter_5_Exercise\\Chapter_5_Exercise\\fact_transactions_2022.csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"TransactionID\", type text}, {\"Date\", type date}, {\"MerchantID\", type text}, {\"CategoryID\", type text}, {\"Debit_Amount\", type number}}),",
+          "    #\"Filtered Rows\" = Table.SelectRows(#\"Changed Type\", each [Debit_Amount] > 100)",
+          "in",
+          "    #\"Filtered Rows\""
+        ],
+        "kind": "m",
+        "lineageTag": "91bc0350-2496-49b3-82c2-121dfdd85fe9"
+      },
+      {
+        "name": "fact_transactions_2023",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = Csv.Document(File.Contents(\"D:\\Portfolio DA\\Codebasics DA Bootcamp\\Power BI\\5 PBI Power Query\\Chapter_5_Exercise\\Chapter_5_Exercise\\fact_transactions_2023.csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+          "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+          "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"TransactionID\", type text}, {\"Date\", type date}, {\"MerchantID\", type text}, {\"CategoryID\", type text}, {\"Debit_Amount\", type number}}),",
+          "    #\"Filtered Rows\" = Table.SelectRows(#\"Changed Type\", each [Debit_Amount] > 100)",
+          "in",
+          "    #\"Filtered Rows\""
+        ],
+        "kind": "m",
+        "lineageTag": "acf4068b-a23f-4d48-a902-e8168d8f7413"
+      }
+    ],
+    "relationships": [
+      {
+        "name": "AutoDetected_28732538-1b2a-4290-94f2-8b85058e8aee",
+        "fromColumn": "MerchantID",
+        "fromTable": "fact_transactions",
+        "toColumn": "MerchantID",
+        "toTable": "dim_merchants"
+      },
+      {
+        "name": "AutoDetected_efe3a654-0aec-4295-b362-441829e9e036",
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "Merchant",
+        "fromTable": "fact_transactions (2)",
+        "toColumn": "Merchant",
+        "toTable": "dim_merchants"
+      },
+      {
+        "name": "AutoDetected_1cf9d0f5-6e22-451a-8a61-55b3bb1a8e0f",
+        "fromColumn": "CategoryID",
+        "fromTable": "fact_transactions",
+        "toColumn": "CategoryID",
+        "toTable": "dim_category"
+      }
+    ],
+    "sourceQueryCulture": "en-IN",
+    "tables": [
+      {
+        "name": "dim_date",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "450a687b-ad86-4a16-8663-c0d99298f19d",
+            "sourceColumn": "Date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "0b1e6634-67f9-4a09-9bc4-29590db79d03",
+            "sourceColumn": "Year",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Month Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "1553d910-e9e7-41e8-b909-13edf419f7ba",
+            "sourceColumn": "Month Name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Day Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "41d3c6bb-0d04-4227-974e-bd1767d251df",
+            "sourceColumn": "Day Name",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "ef4c2b26-f550-426b-8d52-cd6a58568626",
+        "partitions": [
+          {
+            "name": "dim_date",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"D:\\Portfolio DA\\Codebasics DA Bootcamp\\Power BI\\5 PBI Power Query\\Chapter_5_Exercise\\Chapter_5_Exercise\\dim_date.csv\"),[Delimiter=\",\", Columns=1, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"Date\", type date}}),",
+                "    #\"Inserted Year\" = Table.AddColumn(#\"Changed Type\", \"Year\", each Date.Year([Date]), Int64.Type),",
+                "    #\"Inserted Month\" = Table.AddColumn(#\"Inserted Year\", \"Month Name\", each Date.MonthName([Date])),",
+                "    #\"Inserted Day Name\" = Table.AddColumn(#\"Inserted Month\", \"Day Name\", each Date.DayOfWeekName([Date]), type text)",
+                "in",
+                "    #\"Inserted Day Name\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_merchants",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "MerchantID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ad98bdd4-2e6a-45fe-af44-6ee08a28d140",
+            "sourceColumn": "MerchantID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Merchant",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3d64f9e9-03b0-4462-a9b3-70fe2e8cc6d5",
+            "sourceColumn": "Merchant",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Industry Segment",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3f1af2c5-bd90-478e-9a0e-ef8ab6438598",
+            "sourceColumn": "Industry Segment",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "835e9288-55b2-436b-af0e-a04a84de0221",
+        "partitions": [
+          {
+            "name": "dim_merchants",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"D:\\Portfolio DA\\Codebasics DA Bootcamp\\Power BI\\5 PBI Power Query\\Chapter_5_Exercise\\Chapter_5_Exercise\\dim_merchants.csv\"),[Delimiter=\",\", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}, {\"Column2\", type text}}),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Changed Type\", [PromoteAllScalars=true]),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"MerchantID\", type text}, {\"Merchant\", type text}}),",
+                "    #\"Split Column by Delimiter\" = Table.SplitColumn(#\"Changed Type1\", \"Merchant\", Splitter.SplitTextByDelimiter(\"-\", QuoteStyle.Csv), {\"Merchant.1\", \"Merchant.2\"}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Split Column by Delimiter\",{{\"Merchant.1\", \"Merchant\"}, {\"Merchant.2\", \"Industry Segment\"}}),",
+                "    #\"Trimmed Text\" = Table.TransformColumns(#\"Renamed Columns\",{{\"Industry Segment\", Text.Trim, type text}}),",
+                "    #\"Extracted Text Between Delimiters\" = Table.TransformColumns(#\"Trimmed Text\", {{\"Industry Segment\", each Text.BetweenDelimiters(_, \"(\", \")\"), type text}}),",
+                "    #\"Removed Duplicates\" = Table.Distinct(#\"Extracted Text Between Delimiters\", {\"Merchant\", \"Industry Segment\"})",
+                "in",
+                "    #\"Removed Duplicates\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_category",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "CategoryID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "af6eb29e-9cdd-4e7b-b041-54f5f4b9a3b8",
+            "sourceColumn": "CategoryID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CategoryName",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "377cc8d8-b529-4a38-a6d2-fb7cf51d9c05",
+            "sourceColumn": "CategoryName",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "1cb6d28f-2c92-4177-8344-9643afe25dd3",
+        "partitions": [
+          {
+            "name": "dim_category",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(\"D:\\Portfolio DA\\Codebasics DA Bootcamp\\Power BI\\5 PBI Power Query\\Chapter_5_Exercise\\Chapter_5_Exercise\\pivoted_dim_category.csv\"),[Delimiter=\",\", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}, {\"Column2\", type text}, {\"Column3\", type text}, {\"Column4\", type text}, {\"Column5\", type text}}),",
+                "    #\"Transposed Table\" = Table.Transpose(#\"Changed Type\"),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(#\"Transposed Table\", [PromoteAllScalars=true]),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"CategoryID\", type text}, {\"CategoryName\", type text}})",
+                "in",
+                "    #\"Changed Type1\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_transactions",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "TransactionID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6c078d2f-cdf2-435d-8fd4-c87c2b2944f6",
+            "sourceColumn": "TransactionID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "159c25d6-a70c-4961-b5c6-02e24a86da12",
+            "sourceColumn": "Date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "MerchantID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "237ae447-e094-4dbf-b5d3-2daa2757f09c",
+            "sourceColumn": "MerchantID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CategoryID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f676f914-a86d-4727-b10e-b4d6149a9453",
+            "sourceColumn": "CategoryID",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Debit_Amount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "c0513b28-e7d7-47db-83b8-1cdbe4d02220",
+            "sourceColumn": "Debit_Amount",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CategoryName",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "0f512342-3606-4498-81cf-3f7223a509b7",
+            "sourceColumn": "CategoryName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Merchant",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "eab1513b-ec84-4b42-986c-6a0ca7c11040",
+            "sourceColumn": "Merchant",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Transaction Category",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2860a6c3-c069-4bd3-958d-4fd167f97dd2",
+            "sourceColumn": "Transaction Category",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "348621ca-8b23-4569-be94-f8d43d6c90a0",
+        "partitions": [
+          {
+            "name": "fact_transactions",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.Combine({fact_transactions_2022, fact_transactions_2023}),",
+                "    #\"Merged Queries\" = Table.NestedJoin(Source, {\"CategoryID\"}, dim_category, {\"CategoryID\"}, \"dim_category\", JoinKind.LeftOuter),",
+                "    #\"Expanded dim_category\" = Table.ExpandTableColumn(#\"Merged Queries\", \"dim_category\", {\"CategoryName\"}, {\"CategoryName\"}),",
+                "    #\"Merged Queries1\" = Table.NestedJoin(#\"Expanded dim_category\", {\"MerchantID\"}, dim_merchants, {\"MerchantID\"}, \"dim_merchants\", JoinKind.LeftOuter),",
+                "    #\"Expanded dim_merchants\" = Table.ExpandTableColumn(#\"Merged Queries1\", \"dim_merchants\", {\"Merchant\"}, {\"Merchant\"}),",
+                "    #\"Added Conditional Column\" = Table.AddColumn(#\"Expanded dim_merchants\", \"Transaction Category\", each if [Debit_Amount] < 1000 then \"Low\" else \"High\")",
+                "in",
+                "    #\"Added Conditional Column\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_transactions (2)",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Merchant",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "13497354-3e2b-4c60-909f-6d15b0dbdb2e",
+            "sourceColumn": "Merchant",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Debit Amount Aggregated",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "80d13f6b-4734-442a-b13d-df518524538d",
+            "sourceColumn": "Debit Amount Aggregated",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "54e82cf9-e890-433f-a90b-929b9c6f988d",
+        "partitions": [
+          {
+            "name": "fact_transactions (2)",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.Combine({fact_transactions_2022, fact_transactions_2023}),",
+                "    #\"Merged Queries\" = Table.NestedJoin(Source, {\"CategoryID\"}, dim_category, {\"CategoryID\"}, \"dim_category\", JoinKind.LeftOuter),",
+                "    #\"Expanded dim_category\" = Table.ExpandTableColumn(#\"Merged Queries\", \"dim_category\", {\"CategoryName\"}, {\"CategoryName\"}),",
+                "    #\"Merged Queries1\" = Table.NestedJoin(#\"Expanded dim_category\", {\"MerchantID\"}, dim_merchants, {\"MerchantID\"}, \"dim_merchants\", JoinKind.LeftOuter),",
+                "    #\"Expanded dim_merchants\" = Table.ExpandTableColumn(#\"Merged Queries1\", \"dim_merchants\", {\"Merchant\"}, {\"Merchant\"}),",
+                "    #\"Added Conditional Column\" = Table.AddColumn(#\"Expanded dim_merchants\", \"Transaction Category\", each if [Debit_Amount] < 1000 then \"Low\" else \"High\"),",
+                "    #\"Grouped Rows\" = Table.Group(#\"Added Conditional Column\", {\"Merchant\"}, {{\"Debit Amount Aggregated\", each List.Sum([Debit_Amount]), type nullable number}}),",
+                "    #\"Sorted Rows\" = Table.Sort(#\"Grouped Rows\",{{\"Debit Amount Aggregated\", Order.Descending}})",
+                "in",
+                "    #\"Sorted Rows\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

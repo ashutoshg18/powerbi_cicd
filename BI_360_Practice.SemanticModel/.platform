@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "BI_360_Practice"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "05051f10-42c9-438c-879e-818d28643612"
+  }
+}

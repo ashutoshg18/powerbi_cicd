@@ -1,0 +1,1506 @@
+{
+  "compatibilityLevel": 1567,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.139.2054.0 (24.12)+334ca1c95b576cc53924655643b0d36f21caac55"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"dim_customer\",\"dim_market\",\"dim_product\",\"fact_sales_monthly\",\"fact_forecast_monthly\",\"fact_actual_estimates\",\"freight_cost\",\"gross_price\",\"manufacturing_cost\",\"post_invoice_deductions\",\"pre_invoice_deductions\",\"dim_date\",\"remaining_forecast\",\"last_sales_month\"]"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "fastCombine": true,
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "expressions": [
+      {
+        "name": "gross_price",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = MySQL.Database(\"localhost\", \"gdb056\", [ReturnSingleDatabase=true]),",
+          "    gdb056_gross_price = Source{[Schema=\"gdb056\",Item=\"gross_price\"]}[Data]",
+          "in",
+          "    gdb056_gross_price"
+        ],
+        "kind": "m",
+        "lineageTag": "3b665701-e60f-4b53-b2be-4d7b7441d411",
+        "queryGroup": "Supporting Facts"
+      },
+      {
+        "name": "pre_invoice_deductions",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = MySQL.Database(\"localhost\", \"gdb056\", [ReturnSingleDatabase=true]),",
+          "    gdb056_pre_invoice_deductions = Source{[Schema=\"gdb056\",Item=\"pre_invoice_deductions\"]}[Data]",
+          "in",
+          "    gdb056_pre_invoice_deductions"
+        ],
+        "kind": "m",
+        "lineageTag": "be8e2293-64e1-436c-80fc-47bee9d4bfda",
+        "queryGroup": "Supporting Facts"
+      },
+      {
+        "name": "remaining_forecast",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = fact_forecast_monthly,",
+          "    #\"Filtered Rows\" = Table.SelectRows(Source, each ([date] > last_sales_month)),",
+          "    #\"Renamed Columns\" = Table.RenameColumns(#\"Filtered Rows\",{{\"forecast_quantity\", \"quantity\"}})",
+          "in",
+          "    #\"Renamed Columns\""
+        ],
+        "kind": "m",
+        "lineageTag": "41bb0f9a-1d19-4c45-8401-cd9b67d1d5c8",
+        "queryGroup": "Supporting Facts"
+      },
+      {
+        "name": "last_sales_month",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "DateTime"
+          }
+        ],
+        "expression": [
+          "let",
+          "    Source = List.Max(fact_sales_monthly[date])",
+          "in",
+          "    Source"
+        ],
+        "kind": "m",
+        "lineageTag": "4b5d653a-0c0d-4d88-9c14-b903a25acf0d",
+        "queryGroup": "Supporting Facts"
+      }
+    ],
+    "queryGroups": [
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "folder": "Dimensions"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "1"
+          }
+        ],
+        "folder": "Facts"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "2"
+          }
+        ],
+        "folder": "Supporting Facts"
+      }
+    ],
+    "relationships": [
+      {
+        "name": "b3143abc-2662-7b03-c944-7d805d0c74d2",
+        "fromColumn": "date",
+        "fromTable": "fact_sales_monthly",
+        "toColumn": "Date",
+        "toTable": "dim_date"
+      },
+      {
+        "name": "76c53f18-2fc5-2fc0-2ca8-d6a74b601112",
+        "fromColumn": "date",
+        "fromTable": "fact_forecast_monthly",
+        "toColumn": "Date",
+        "toTable": "dim_date"
+      },
+      {
+        "name": "b53a9b5d-d4a1-cb75-db3d-bd1cfb2b32bb",
+        "fromColumn": "product_code",
+        "fromTable": "fact_sales_monthly",
+        "toColumn": "product_code",
+        "toTable": "dim_product"
+      },
+      {
+        "name": "45c0688c-6c42-c8ba-4cca-501d9f1e4a29",
+        "fromColumn": "product_code",
+        "fromTable": "fact_forecast_monthly",
+        "toColumn": "product_code",
+        "toTable": "dim_product"
+      }
+    ],
+    "sourceQueryCulture": "en-IN",
+    "tables": [
+      {
+        "name": "dim_customer",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "customer",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ff8cdd01-059a-4dfe-b85d-2f3625a53312",
+            "sourceColumn": "customer",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "market",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f4b66b4a-7909-4318-90ad-5405a0cdeb98",
+            "sourceColumn": "market",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "platform",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "dee8feb3-b795-4d9c-960d-ae20c2f8f527",
+            "sourceColumn": "platform",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "channel",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c7903ffa-1a07-4352-bb57-ec4534b77791",
+            "sourceColumn": "channel",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "customer_code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "277f0517-48b8-4a14-91f2-1a4ecc9f9192",
+            "sourceColumn": "customer_code",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "b4850d3e-d4ab-4a98-9390-1707638e79dc",
+        "partitions": [
+          {
+            "name": "dim_customer",
+            "mode": "import",
+            "queryGroup": "Dimensions",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = MySQL.Database(\"localhost\", \"gdb041\", [ReturnSingleDatabase=true]),",
+                "    gdb041_dim_customer = Source{[Schema=\"gdb041\",Item=\"dim_customer\"]}[Data]",
+                "in",
+                "    gdb041_dim_customer"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_market",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "market",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "68f03b2b-4987-471b-83f7-db1a4ff36a50",
+            "sourceColumn": "market",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "sub_zone",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e4f46a11-4826-4f4c-939b-2bf97d50f0fe",
+            "sourceColumn": "sub_zone",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "region",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "af5a1fab-cf8e-42f3-aa63-18c4a806c86d",
+            "sourceColumn": "region",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "03dcab6b-441d-4e87-b5ee-470c43be7cbc",
+        "partitions": [
+          {
+            "name": "dim_market",
+            "mode": "import",
+            "queryGroup": "Dimensions",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = MySQL.Database(\"localhost\", \"gdb041\", [ReturnSingleDatabase=true]),",
+                "    gdb041_dim_market = Source{[Schema=\"gdb041\",Item=\"dim_market\"]}[Data]",
+                "in",
+                "    gdb041_dim_market"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_product",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "product_code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f8b58284-2159-4aad-8ffe-001c4bac4f7e",
+            "sourceColumn": "product_code",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "division",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "09530921-0a40-497b-b480-aa275080a288",
+            "sourceColumn": "division",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "segment",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "dd74e45c-e172-4be9-811b-2faab893ef85",
+            "sourceColumn": "segment",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "category",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "550b630e-a6c7-409d-b216-176986663e45",
+            "sourceColumn": "category",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "product",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a6678e5a-f86b-43c3-826b-ac96388d859b",
+            "sourceColumn": "product",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "variant",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a6dfe235-68e4-4aef-994c-7d3825fd610a",
+            "sourceColumn": "variant",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "7fc6c03a-c081-4fad-81fb-975bea0d4d39",
+        "partitions": [
+          {
+            "name": "dim_product",
+            "mode": "import",
+            "queryGroup": "Dimensions",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = MySQL.Database(\"localhost\", \"gdb041\", [ReturnSingleDatabase=true]),",
+                "    gdb041_dim_product = Source{[Schema=\"gdb041\",Item=\"dim_product\"]}[Data]",
+                "in",
+                "    gdb041_dim_product"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_sales_monthly",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "DataType"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "53246d14-5a3c-4ef2-900e-306a73eefb09",
+            "sourceColumn": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "division",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7971d6a9-b9f8-47db-a123-5ed5ad14fc7c",
+            "sourceColumn": "division",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "category",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "cacc5c0c-1aed-4f48-927a-f4235b30b626",
+            "sourceColumn": "category",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "product_code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d893a0cf-50c7-4603-aab6-43de3c962afb",
+            "sourceColumn": "product_code",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "product",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "99020481-420d-4692-9974-9739ca241ebf",
+            "sourceColumn": "product",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "market",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9f877cd9-0211-41af-bfa4-35e4877233fa",
+            "sourceColumn": "market",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "platform",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "453a87f8-8d67-452c-b079-501e4de6a3d3",
+            "sourceColumn": "platform",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "channel",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "82b2fc40-c539-43dd-bf75-08be4fb30c2d",
+            "sourceColumn": "channel",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "customer_code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c49a4351-47f5-4065-9ac7-dc69e5fded64",
+            "sourceColumn": "customer_code",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "customer_name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3368e6e8-c463-4a97-acd2-6d3dfc77d89e",
+            "sourceColumn": "customer_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "quantity",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "bbfb1984-33fa-4df9-bc47-de633f75f6f1",
+            "sourceColumn": "quantity",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "8d8868f0-acd6-4d1b-8d6e-3cc1e3b18030",
+        "partitions": [
+          {
+            "name": "fact_sales_monthly",
+            "mode": "import",
+            "queryGroup": "Facts",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = MySQL.Database(\"localhost\", \"gdb041\", [ReturnSingleDatabase=true]),",
+                "    gdb041_fact_sales_monthly = Source{[Schema=\"gdb041\",Item=\"fact_sales_monthly\"]}[Data],",
+                "    #\"Renamed Columns\" = Table.RenameColumns(gdb041_fact_sales_monthly,{{\"sold_quantity\", \"quantity\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_forecast_monthly",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "5451f1f2-9824-4047-bd72-534a1d333737",
+            "sourceColumn": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "division",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ba3dfd5f-58f9-4658-9f99-c25f1a9df772",
+            "sourceColumn": "division",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "category",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "241f9564-2cf3-4137-8d24-4aa5647e73eb",
+            "sourceColumn": "category",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "product_code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "123a1d8a-d085-46ee-ba46-e6f415bbc302",
+            "sourceColumn": "product_code",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "product",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "47dc49a1-705e-4517-9f7a-7adc1959eaee",
+            "sourceColumn": "product",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "market",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b5b96931-da1a-4c6b-b057-d84739287b4f",
+            "sourceColumn": "market",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "platform",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6ec6f24a-60c5-49f7-8f2f-286c342f2bf6",
+            "sourceColumn": "platform",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "channel",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "dea65e2d-65d9-4e3d-a535-cdb66c99798c",
+            "sourceColumn": "channel",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "customer_code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b274bebd-db51-448e-bfda-84fc432df66c",
+            "sourceColumn": "customer_code",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "customer_name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ef86b3cb-2518-4fd2-8b1b-9b76e9fbcb99",
+            "sourceColumn": "customer_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "forecast_quantity",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "bf5907d1-6b99-4489-8ef6-d891936d623d",
+            "sourceColumn": "forecast_quantity",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "3649b44a-841b-4a5b-8aa2-2d422a2775f0",
+        "partitions": [
+          {
+            "name": "fact_forecast_monthly",
+            "mode": "import",
+            "queryGroup": "Facts",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = MySQL.Database(\"localhost\", \"gdb041\", [ReturnSingleDatabase=true]),",
+                "    gdb041_fact_forecast_monthly = Source{[Schema=\"gdb041\",Item=\"fact_forecast_monthly\"]}[Data]",
+                "in",
+                "    gdb041_fact_forecast_monthly"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "freight_cost",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "market",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "cf70b3c3-fe68-4a98-889b-bff336967e9d",
+            "sourceColumn": "market",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "fiscal_year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5951e9ee-b114-4fc9-9ddf-7e590addbe20",
+            "sourceColumn": "fiscal_year",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "freight_pct",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "c69dcc86-44c2-4b5a-8e8a-308443af2960",
+            "sourceColumn": "freight_pct",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "other_cost_pct",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "05a81f88-70e8-4150-a775-7752e1b87bb4",
+            "sourceColumn": "other_cost_pct",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "05204145-bb78-47b7-aa46-84ff83230a10",
+        "partitions": [
+          {
+            "name": "freight_cost",
+            "mode": "import",
+            "queryGroup": "Supporting Facts",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = MySQL.Database(\"localhost\", \"gdb056\", [ReturnSingleDatabase=true]),",
+                "    gdb056_freight_cost = Source{[Schema=\"gdb056\",Item=\"freight_cost\"]}[Data]",
+                "in",
+                "    gdb056_freight_cost"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "manufacturing_cost",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "product_code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a4469767-1845-4c71-b30a-0a1ca5fc5e3a",
+            "sourceColumn": "product_code",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "cost_year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f8426bc2-a5d0-4eaf-8718-d9721077d0c9",
+            "sourceColumn": "cost_year",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "manufacturing_cost",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "48b26361-9527-4963-a3fb-5e8309fdca6e",
+            "sourceColumn": "manufacturing_cost",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "4b914791-9b81-43ee-be6f-a8dee65655c8",
+        "partitions": [
+          {
+            "name": "manufacturing_cost",
+            "mode": "import",
+            "queryGroup": "Supporting Facts",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = MySQL.Database(\"localhost\", \"gdb056\", [ReturnSingleDatabase=true]),",
+                "    gdb056_manufacturing_cost = Source{[Schema=\"gdb056\",Item=\"manufacturing_cost\"]}[Data]",
+                "in",
+                "    gdb056_manufacturing_cost"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "post_invoice_deductions",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "customer_code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5f2d55e7-14b7-474c-9ba6-6c5ae03ae915",
+            "sourceColumn": "customer_code",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "product_code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "47b6d6fb-b401-4388-9bd9-d8b1fdd84091",
+            "sourceColumn": "product_code",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "89f6e43d-8986-416d-b3c7-d0aaecd59155",
+            "sourceColumn": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "discounts_pct",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "092c40b8-135c-41d7-9e7f-a3efc0a29471",
+            "sourceColumn": "discounts_pct",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "other_deductions_pct",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "f57894b0-40c0-4fad-9892-84968af2d3c0",
+            "sourceColumn": "other_deductions_pct",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "b9c8b53b-c872-4807-83fb-42e22effb122",
+        "partitions": [
+          {
+            "name": "post_invoice_deductions",
+            "mode": "import",
+            "queryGroup": "Supporting Facts",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = MySQL.Database(\"localhost\", \"gdb056\", [ReturnSingleDatabase=true]),",
+                "    gdb056_post_invoice_deductions = Source{[Schema=\"gdb056\",Item=\"post_invoice_deductions\"]}[Data]",
+                "in",
+                "    gdb056_post_invoice_deductions"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "dim_date",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "4ca0e941-e3b7-4186-bcfd-1bf0ae4fb1d2",
+            "sourceColumn": "Date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "1447d42e-395a-4a57-abf9-4853b0808130",
+            "sourceColumn": "Month",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Fiscal Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5bc1d62d-fd23-4af1-9bd6-4ad92c1fed79",
+            "sourceColumn": "Fiscal Year",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "9727c909-88ad-4338-80ee-c90fa43313e7",
+        "partitions": [
+          {
+            "name": "dim_date",
+            "mode": "import",
+            "queryGroup": "Dimensions",
+            "source": {
+              "expression": [
+                "let",
+                "    Query1 = {Number.From(#date(2017,9,1))..Number.From(#date(2022,12,31))},",
+                "    #\"Converted to Table\" = Table.FromList(Query1, Splitter.SplitByNothing(), null, null, ExtraValues.Error),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Converted to Table\",{{\"Column1\", type date}}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Changed Type\",{{\"Column1\", \"Date\"}}),",
+                "    #\"Inserted Start of Month\" = Table.AddColumn(#\"Renamed Columns\", \"Start of Month\", each Date.StartOfMonth([Date]), type date),",
+                "    #\"Renamed Columns1\" = Table.RenameColumns(#\"Inserted Start of Month\",{{\"Start of Month\", \"Month\"}}),",
+                "    #\"Added Custom\" = Table.AddColumn(#\"Renamed Columns1\", \"Fiscal Year\", each Date.Year(Date.AddMonths([Month], 4))),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Added Custom\",{{\"Fiscal Year\", type text}})",
+                "in",
+                "    #\"Changed Type1\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fact_actual_estimates",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "lineageTag": "17cb9fe3-5c71-4b07-a9f4-7636a72377ba",
+            "sourceColumn": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "division",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "49c775cd-0add-4ce9-a087-5b625814aca6",
+            "sourceColumn": "division",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "category",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "447a2395-0d79-454f-8329-25bd4f593cbc",
+            "sourceColumn": "category",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "product_code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f1c3396a-3943-4bed-b370-ab0cf7cc4a96",
+            "sourceColumn": "product_code",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "product",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "61ccbc9f-ce0b-4e5b-bee9-6886186cc330",
+            "sourceColumn": "product",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "market",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "0d04724f-39c5-4bbe-8307-b92454493e6c",
+            "sourceColumn": "market",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "platform",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ae19fb52-41a8-43a3-9b93-ec6c7f094d44",
+            "sourceColumn": "platform",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "channel",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "71ac4f4d-d27a-4430-89b4-7d4c8009da2d",
+            "sourceColumn": "channel",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "customer_code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7df8bfab-f71d-4fc2-b694-2b8a44c2c982",
+            "sourceColumn": "customer_code",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "customer_name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f24b5770-5e35-4651-88b6-3639910e0044",
+            "sourceColumn": "customer_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "quantity",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "2e00c6bb-dcf0-4a6b-a53c-0c49519f5a96",
+            "sourceColumn": "quantity",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "fiscal_year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "8088be92-db29-402b-8051-19cc598bb7e7",
+            "sourceColumn": "fiscal_year",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "gross_price",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-IN\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\"₹\"\\ #,0.###############;#,0.###############\\ -\"₹\";\"₹\"\\ #,0.###############",
+            "lineageTag": "0f3fe007-9252-4402-b7f9-302b0263fcdc",
+            "sourceColumn": "gross_price",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "pre_invoice_discount_pct",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "719ed044-8fb7-469d-b3f8-4feab5494cbb",
+            "sourceColumn": "pre_invoice_discount_pct",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "pre_invoice_discount_amount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-IN\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\"₹\"\\ #,0.###############;#,0.###############\\ -\"₹\";\"₹\"\\ #,0.###############",
+            "lineageTag": "09923a27-332b-459e-af15-10abd043282b",
+            "sourceColumn": "pre_invoice_discount_amount",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "net_invoice_sales_amount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-IN\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\"₹\"\\ #,0.###############;#,0.###############\\ -\"₹\";\"₹\"\\ #,0.###############",
+            "lineageTag": "7bffd316-efea-4e52-97ec-133a0a93fac4",
+            "sourceColumn": "net_invoice_sales_amount",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "gross_sales_amount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-IN\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\"₹\"\\ #,0.###############;#,0.###############\\ -\"₹\";\"₹\"\\ #,0.###############",
+            "lineageTag": "d11e3c51-9a98-4ea0-9a43-d7f40ad0e5ae",
+            "sourceColumn": "gross_sales_amount",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "f44dc5c2-7606-4063-86ff-4ca2b49240c5",
+        "partitions": [
+          {
+            "name": "fact_actual_estimates",
+            "mode": "import",
+            "queryGroup": "Facts",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.Combine({fact_sales_monthly, remaining_forecast}),",
+                "    #\"Added Custom fiscal_year\" = Table.AddColumn(Source, \"fiscal_year\", each Date.Year(Date.AddMonths([date],4))),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Added Custom fiscal_year\",{{\"fiscal_year\", type text}}),",
+                "    #\"Merged fact_act_est_with_gross_price\" = Table.NestedJoin(#\"Changed Type\", {\"product_code\", \"fiscal_year\"}, gross_price, {\"product_code\", \"fiscal_year\"}, \"gdb056 gross_price\", JoinKind.LeftOuter),",
+                "    #\"Expanded gdb056 gross_price\" = Table.ExpandTableColumn(#\"Merged fact_act_est_with_gross_price\", \"gdb056 gross_price\", {\"gross_price\"}, {\"gross_price\"}),",
+                "    #\"Changed Type1\" = Table.TransformColumnTypes(#\"Expanded gdb056 gross_price\",{{\"gross_price\", Currency.Type}}),",
+                "    #\"Added gross_sales_amount\" = Table.AddColumn(#\"Changed Type1\", \"gross_sales_amount\", each [gross_price] * [quantity]),",
+                "    #\"Changed Type2\" = Table.TransformColumnTypes(#\"Added gross_sales_amount\",{{\"gross_sales_amount\", Currency.Type}}),",
+                "    #\"Merged fact_act_est with pre_inv_dedct\" = Table.NestedJoin(#\"Changed Type2\", {\"customer_code\", \"fiscal_year\"}, pre_invoice_deductions, {\"customer_code\", \"fiscal_year\"}, \"gdb056 pre_invoice_deductions\", JoinKind.LeftOuter),",
+                "    #\"Expanded gdb056 pre_invoice_deductions\" = Table.ExpandTableColumn(#\"Merged fact_act_est with pre_inv_dedct\", \"gdb056 pre_invoice_deductions\", {\"pre_invoice_discount_pct\"}, {\"pre_invoice_discount_pct\"}),",
+                "    #\"Changed Type3\" = Table.TransformColumnTypes(#\"Expanded gdb056 pre_invoice_deductions\",{{\"pre_invoice_discount_pct\", Percentage.Type}}),",
+                "    #\"Added pre_invoice_discount_amt\" = Table.AddColumn(#\"Changed Type3\", \"pre_invoice_discount_amount\", each [gross_sales_amount] * [pre_invoice_discount_pct]),",
+                "    #\"Changed Type4\" = Table.TransformColumnTypes(#\"Added pre_invoice_discount_amt\",{{\"pre_invoice_discount_amount\", Currency.Type}}),",
+                "    #\"Added net_inv_sales_amt\" = Table.AddColumn(#\"Changed Type4\", \"net_invoice_sales_amount\", each [gross_sales_amount] - [pre_invoice_discount_amount]),",
+                "    #\"Changed Type5\" = Table.TransformColumnTypes(#\"Added net_inv_sales_amt\",{{\"net_invoice_sales_amount\", Currency.Type}})",
+                "in",
+                "    #\"Changed Type5\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
