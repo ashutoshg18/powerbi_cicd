@@ -5,18 +5,18 @@
       "ordinal": 0,
       "scrollPosition": {
         "x": 0,
-        "y": 0
+        "y": 15
       },
       "nodes": [
         {
           "location": {
-            "x": 931.5,
-            "y": 305.41666666666669
+            "x": 830.25,
+            "y": 26.25
           },
           "nodeIndex": "fact_actual_estimates",
           "nodeLineageTag": "f44dc5c2-7606-4063-86ff-4ca2b49240c5",
           "size": {
-            "height": 300,
+            "height": 266.25,
             "width": 234
           },
           "zIndex": 0
@@ -35,10 +35,11 @@
         },
         {
           "location": {
-            "x": 525.25,
-            "y": 1.5
+            "x": 515.25,
+            "y": 0
           },
           "nodeIndex": "dim_market",
+          "nodeLineageTag": "03dcab6b-441d-4e87-b5ee-470c43be7cbc",
           "size": {
             "height": 152,
             "width": 234
@@ -47,10 +48,11 @@
         },
         {
           "location": {
-            "x": 810.5,
-            "y": 0
+            "x": 511.75,
+            "y": 226.25
           },
           "nodeIndex": "dim_product",
+          "nodeLineageTag": "7fc6c03a-c081-4fad-81fb-975bea0d4d39",
           "size": {
             "height": 224,
             "width": 234
@@ -59,58 +61,63 @@
         },
         {
           "location": {
-            "x": 830.16666666666652,
-            "y": 610.83333333333337
+            "x": 842.66666666666652,
+            "y": 499.58333333333337
           },
           "nodeIndex": "fact_sales_monthly",
+          "nodeLineageTag": "8d8868f0-acd6-4d1b-8d6e-3cc1e3b18030",
           "size": {
-            "height": 300,
+            "height": 172.5,
             "width": 234
           },
           "zIndex": 0
         },
         {
           "location": {
-            "x": 824.5,
-            "y": 266.25
+            "x": 834.5,
+            "y": 288.75
           },
           "nodeIndex": "fact_forecast_monthly",
+          "nodeLineageTag": "3649b44a-841b-4a5b-8aa2-2d422a2775f0",
           "size": {
-            "height": 300,
+            "height": 190,
             "width": 234
           },
           "zIndex": 0
         },
         {
           "location": {
-            "x": 508.75,
-            "y": 398.25
+            "x": 832.5,
+            "y": 693.25
           },
           "nodeIndex": "freight_cost",
+          "nodeLineageTag": "05204145-bb78-47b7-aa46-84ff83230a10",
           "size": {
-            "height": 176,
+            "height": 177.25,
             "width": 234
           },
           "zIndex": 0
         },
         {
           "location": {
-            "x": 1094.25,
-            "y": 26.5
+            "x": 831.75,
+            "y": 1096.5
           },
           "nodeIndex": "manufacturing_cost",
+          "nodeLineageTag": "4b914791-9b81-43ee-be6f-a8dee65655c8",
           "size": {
-            "height": 152,
-            "width": 234
+            "height": 154.5,
+            "width": 240.25
           },
           "zIndex": 0
         },
         {
           "location": {
-            "x": 1124.5,
-            "y": 203.75
+            "x": 833.25,
+            "y": 886.25
           },
           "nodeIndex": "post_invoice_deductions",
+          "nodeLineageTag": "b9c8b53b-c872-4807-83fb-42e22effb122",
           "size": {
             "height": 200,
             "width": 234
@@ -119,10 +126,11 @@
         },
         {
           "location": {
-            "x": 1138.75,
-            "y": 439
+            "x": 1238.75,
+            "y": 465.25
           },
           "nodeIndex": "dim_date",
+          "nodeLineageTag": "9727c909-88ad-4338-80ee-c90fa43313e7",
           "size": {
             "height": 152,
             "width": 234

@@ -189,6 +189,83 @@
         "fromTable": "fact_forecast_monthly",
         "toColumn": "product_code",
         "toTable": "dim_product"
+      },
+      {
+        "name": "084f5b1a-af0a-9053-5fe1-f1d90f53467e",
+        "fromColumn": "date",
+        "fromTable": "fact_actual_estimates",
+        "toColumn": "Date",
+        "toTable": "dim_date"
+      },
+      {
+        "name": "76ab13af-42c8-2585-2261-d388117ff188",
+        "fromColumn": "date",
+        "fromTable": "post_invoice_deductions",
+        "toColumn": "Date",
+        "toTable": "dim_date"
+      },
+      {
+        "name": "499642e5-0220-0059-fc9f-99918982543e",
+        "fromColumn": "customer_code",
+        "fromTable": "post_invoice_deductions",
+        "toColumn": "customer_code",
+        "toTable": "dim_customer"
+      },
+      {
+        "name": "b218989f-2780-3ef0-43fa-dd571c1ff7c8",
+        "fromColumn": "customer_code",
+        "fromTable": "fact_sales_monthly",
+        "toColumn": "customer_code",
+        "toTable": "dim_customer"
+      },
+      {
+        "name": "08d5cf5f-915b-90e9-b3f1-07d8b323fcad",
+        "fromColumn": "customer_code",
+        "fromTable": "fact_forecast_monthly",
+        "toColumn": "customer_code",
+        "toTable": "dim_customer"
+      },
+      {
+        "name": "acbb69fb-5f03-746c-7ed0-0654fabd66a5",
+        "fromColumn": "customer_code",
+        "fromTable": "fact_actual_estimates",
+        "toColumn": "customer_code",
+        "toTable": "dim_customer"
+      },
+      {
+        "name": "53fb96cb-4f59-d88f-b0de-f94651b05986",
+        "fromColumn": "product_code",
+        "fromTable": "manufacturing_cost",
+        "toColumn": "product_code",
+        "toTable": "dim_product"
+      },
+      {
+        "name": "dc9e20b6-1858-5aa2-c94b-88de8ef464ce",
+        "fromColumn": "product_code",
+        "fromTable": "post_invoice_deductions",
+        "toColumn": "product_code",
+        "toTable": "dim_product"
+      },
+      {
+        "name": "4296b32a-c263-8531-5436-ee696d78ef16",
+        "fromColumn": "product_code",
+        "fromTable": "fact_actual_estimates",
+        "toColumn": "product_code",
+        "toTable": "dim_product"
+      },
+      {
+        "name": "d626f6cb-e99d-ed80-77f5-1ff117195b5c",
+        "fromColumn": "market",
+        "fromTable": "freight_cost",
+        "toColumn": "market",
+        "toTable": "dim_market"
+      },
+      {
+        "name": "ef8116cc-5efc-bc7e-2522-79b7837456cc",
+        "fromColumn": "market",
+        "fromTable": "dim_customer",
+        "toColumn": "market",
+        "toTable": "dim_market"
       }
     ],
     "sourceQueryCulture": "en-IN",
@@ -511,32 +588,6 @@
             "summarizeBy": "none"
           },
           {
-            "name": "division",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "7971d6a9-b9f8-47db-a123-5ed5ad14fc7c",
-            "sourceColumn": "division",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "category",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "cacc5c0c-1aed-4f48-927a-f4235b30b626",
-            "sourceColumn": "category",
-            "summarizeBy": "none"
-          },
-          {
             "name": "product_code",
             "annotations": [
               {
@@ -550,58 +601,6 @@
             "summarizeBy": "none"
           },
           {
-            "name": "product",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "99020481-420d-4692-9974-9739ca241ebf",
-            "sourceColumn": "product",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "market",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "9f877cd9-0211-41af-bfa4-35e4877233fa",
-            "sourceColumn": "market",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "platform",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "453a87f8-8d67-452c-b079-501e4de6a3d3",
-            "sourceColumn": "platform",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "channel",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "82b2fc40-c539-43dd-bf75-08be4fb30c2d",
-            "sourceColumn": "channel",
-            "summarizeBy": "none"
-          },
-          {
             "name": "customer_code",
             "annotations": [
               {
@@ -612,19 +611,6 @@
             "dataType": "string",
             "lineageTag": "c49a4351-47f5-4065-9ac7-dc69e5fded64",
             "sourceColumn": "customer_code",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "customer_name",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "3368e6e8-c463-4a97-acd2-6d3dfc77d89e",
-            "sourceColumn": "customer_name",
             "summarizeBy": "none"
           },
           {
@@ -653,9 +639,10 @@
                 "let",
                 "    Source = MySQL.Database(\"localhost\", \"gdb041\", [ReturnSingleDatabase=true]),",
                 "    gdb041_fact_sales_monthly = Source{[Schema=\"gdb041\",Item=\"fact_sales_monthly\"]}[Data],",
-                "    #\"Renamed Columns\" = Table.RenameColumns(gdb041_fact_sales_monthly,{{\"sold_quantity\", \"quantity\"}})",
+                "    #\"Renamed Columns\" = Table.RenameColumns(gdb041_fact_sales_monthly,{{\"sold_quantity\", \"quantity\"}}),",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(#\"Renamed Columns\",{\"date\", \"product_code\", \"customer_code\", \"quantity\"})",
                 "in",
-                "    #\"Renamed Columns\""
+                "    #\"Removed Other Columns\""
               ],
               "type": "m"
             }
@@ -690,32 +677,6 @@
             "summarizeBy": "none"
           },
           {
-            "name": "division",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "ba3dfd5f-58f9-4658-9f99-c25f1a9df772",
-            "sourceColumn": "division",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "category",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "241f9564-2cf3-4137-8d24-4aa5647e73eb",
-            "sourceColumn": "category",
-            "summarizeBy": "none"
-          },
-          {
             "name": "product_code",
             "annotations": [
               {
@@ -729,58 +690,6 @@
             "summarizeBy": "none"
           },
           {
-            "name": "product",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "47dc49a1-705e-4517-9f7a-7adc1959eaee",
-            "sourceColumn": "product",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "market",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "b5b96931-da1a-4c6b-b057-d84739287b4f",
-            "sourceColumn": "market",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "platform",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "6ec6f24a-60c5-49f7-8f2f-286c342f2bf6",
-            "sourceColumn": "platform",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "channel",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "dea65e2d-65d9-4e3d-a535-cdb66c99798c",
-            "sourceColumn": "channel",
-            "summarizeBy": "none"
-          },
-          {
             "name": "customer_code",
             "annotations": [
               {
@@ -791,19 +700,6 @@
             "dataType": "string",
             "lineageTag": "b274bebd-db51-448e-bfda-84fc432df66c",
             "sourceColumn": "customer_code",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "customer_name",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "ef86b3cb-2518-4fd2-8b1b-9b76e9fbcb99",
-            "sourceColumn": "customer_name",
             "summarizeBy": "none"
           },
           {
@@ -831,9 +727,10 @@
               "expression": [
                 "let",
                 "    Source = MySQL.Database(\"localhost\", \"gdb041\", [ReturnSingleDatabase=true]),",
-                "    gdb041_fact_forecast_monthly = Source{[Schema=\"gdb041\",Item=\"fact_forecast_monthly\"]}[Data]",
+                "    gdb041_fact_forecast_monthly = Source{[Schema=\"gdb041\",Item=\"fact_forecast_monthly\"]}[Data],",
+                "    #\"Removed Other Columns\" = Table.SelectColumns(gdb041_fact_forecast_monthly,{\"date\", \"product_code\", \"customer_code\", \"forecast_quantity\"})",
                 "in",
-                "    gdb041_fact_forecast_monthly"
+                "    #\"Removed Other Columns\""
               ],
               "type": "m"
             }
@@ -1236,32 +1133,6 @@
             "summarizeBy": "none"
           },
           {
-            "name": "division",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "49c775cd-0add-4ce9-a087-5b625814aca6",
-            "sourceColumn": "division",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "category",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "447a2395-0d79-454f-8329-25bd4f593cbc",
-            "sourceColumn": "category",
-            "summarizeBy": "none"
-          },
-          {
             "name": "product_code",
             "annotations": [
               {
@@ -1275,58 +1146,6 @@
             "summarizeBy": "none"
           },
           {
-            "name": "product",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "61ccbc9f-ce0b-4e5b-bee9-6886186cc330",
-            "sourceColumn": "product",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "market",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "0d04724f-39c5-4bbe-8307-b92454493e6c",
-            "sourceColumn": "market",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "platform",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "ae19fb52-41a8-43a3-9b93-ec6c7f094d44",
-            "sourceColumn": "platform",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "channel",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "71ac4f4d-d27a-4430-89b4-7d4c8009da2d",
-            "sourceColumn": "channel",
-            "summarizeBy": "none"
-          },
-          {
             "name": "customer_code",
             "annotations": [
               {
@@ -1337,19 +1156,6 @@
             "dataType": "string",
             "lineageTag": "7df8bfab-f71d-4fc2-b694-2b8a44c2c982",
             "sourceColumn": "customer_code",
-            "summarizeBy": "none"
-          },
-          {
-            "name": "customer_name",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ],
-            "dataType": "string",
-            "lineageTag": "f24b5770-5e35-4651-88b6-3639910e0044",
-            "sourceColumn": "customer_name",
             "summarizeBy": "none"
           },
           {
