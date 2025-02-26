@@ -1,0 +1,193 @@
+{
+  "compatibilityLevel": 1550,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.139.2054.0 (24.12)+334ca1c95b576cc53924655643b0d36f21caac55"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"Sheet1\"]"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "en-IN",
+    "tables": [
+      {
+        "name": "Sheet1",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "product_name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "187c45a8-99bf-4f23-9b73-890e4eb42039",
+            "sourceColumn": "product_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "category",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9882c2a6-6421-473c-b330-8165557f4fe7",
+            "sourceColumn": "category",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "brand",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "fd85d4c0-9ae0-414b-ac30-c5b6681ed9b9",
+            "sourceColumn": "brand",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "price",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "3f08af9a-b324-4260-9f5c-3f8249ebcfc6",
+            "sourceColumn": "price",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "quantity",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "1b511991-3af0-4938-8dc4-fccb32d64b95",
+            "sourceColumn": "quantity",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "sale_amount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "524b3321-ce0a-4958-828d-c561554d84c1",
+            "sourceColumn": "sale_amount",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "20edc8a5-a889-4b5a-867a-4e671cde51a7",
+        "measures": [
+          {
+            "name": "Category Sales",
+            "expression": [
+              "",
+              "SUM(Sheet1[sale_amount])"
+            ],
+            "formatString": "0",
+            "lineageTag": "de1c2385-53b6-44c8-a976-aca7b84e6d25"
+          },
+          {
+            "name": "Total Sales",
+            "expression": [
+              "",
+              "CALCULATE([Category Sales], ALL(Sheet1))"
+            ],
+            "formatString": "0",
+            "lineageTag": "9cff4a56-dde5-4ec3-8bcb-f5a8c89a4ef7"
+          },
+          {
+            "name": "% Contribution",
+            "expression": [
+              "",
+              "DIVIDE([Category Sales],[Total Sales],0)"
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "lineageTag": "4987b75f-2136-477d-a817-67ab5e540d69"
+          },
+          {
+            "name": "Sales by category",
+            "expression": [
+              "",
+              "CALCULATE([Category Sales], ALLEXCEPT(Sheet1,Sheet1[category]))"
+            ],
+            "formatString": "0",
+            "lineageTag": "e79059c5-2eb7-43a7-9bba-ea63175bbd82"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Sheet1",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Excel.Workbook(File.Contents(\"D:\\Portfolio DA\\Codebasics DA Bootcamp\\Power BI\\6 DAX fear removed\\Chapter_6_Excercise\\Chapter_6_inputs\\apparels_dataset.xlsx\"), null, true),",
+                "    Sheet1_Sheet = Source{[Item=\"Sheet1\",Kind=\"Sheet\"]}[Data],",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"product_name\", type text}, {\"category\", type text}, {\"brand\", type text}, {\"price\", Int64.Type}, {\"quantity\", Int64.Type}, {\"sale_amount\", Int64.Type}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

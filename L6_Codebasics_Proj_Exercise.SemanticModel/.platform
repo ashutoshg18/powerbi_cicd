@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "L6_Codebasics_Proj_Exercise"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3a3244ad-5077-45bf-a189-4c0a99c05efb"
+  }
+}
