@@ -266,6 +266,27 @@
         "fromTable": "dim_customer",
         "toColumn": "market",
         "toTable": "dim_market"
+      },
+      {
+        "name": "11be94d4-55b6-f6fd-7e38-346ea748f77c",
+        "fromColumn": "cost_year",
+        "fromTable": "manufacturing_cost",
+        "toColumn": "Fiscal Year",
+        "toTable": "fiscal_year"
+      },
+      {
+        "name": "1670eee3-60bf-24e0-27e0-9907e4cde18c",
+        "fromColumn": "Fiscal Year",
+        "fromTable": "dim_date",
+        "toColumn": "Fiscal Year",
+        "toTable": "fiscal_year"
+      },
+      {
+        "name": "ba28f1a7-79b2-71b5-92aa-27a68383764d",
+        "fromColumn": "fiscal_year",
+        "fromTable": "freight_cost",
+        "toColumn": "Fiscal Year",
+        "toTable": "fiscal_year"
       }
     ],
     "sourceQueryCulture": "en-IN",
@@ -1191,51 +1212,12 @@
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
-              },
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"currencyCulture\":\"en-IN\"}"
               }
             ],
             "dataType": "decimal",
-            "formatString": "\"₹\"\\ #,0.###############;#,0.###############\\ -\"₹\";\"₹\"\\ #,0.###############",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
             "lineageTag": "0f3fe007-9252-4402-b7f9-302b0263fcdc",
             "sourceColumn": "gross_price",
-            "summarizeBy": "sum"
-          },
-          {
-            "name": "pre_invoice_discount_pct",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              },
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
-            "dataType": "double",
-            "lineageTag": "719ed044-8fb7-469d-b3f8-4feab5494cbb",
-            "sourceColumn": "pre_invoice_discount_pct",
-            "summarizeBy": "sum"
-          },
-          {
-            "name": "pre_invoice_discount_amount",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              },
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"currencyCulture\":\"en-IN\"}"
-              }
-            ],
-            "dataType": "decimal",
-            "formatString": "\"₹\"\\ #,0.###############;#,0.###############\\ -\"₹\";\"₹\"\\ #,0.###############",
-            "lineageTag": "09923a27-332b-459e-af15-10abd043282b",
-            "sourceColumn": "pre_invoice_discount_amount",
             "summarizeBy": "sum"
           },
           {
@@ -1244,35 +1226,137 @@
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
-              },
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"currencyCulture\":\"en-IN\"}"
               }
             ],
             "dataType": "decimal",
-            "formatString": "\"₹\"\\ #,0.###############;#,0.###############\\ -\"₹\";\"₹\"\\ #,0.###############",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
             "lineageTag": "7bffd316-efea-4e52-97ec-133a0a93fac4",
             "sourceColumn": "net_invoice_sales_amount",
             "summarizeBy": "sum"
           },
           {
-            "name": "gross_sales_amount",
+            "name": "Post_invoice_Deduct",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
                 "value": "Automatic"
-              },
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"currencyCulture\":\"en-IN\"}"
               }
             ],
             "dataType": "decimal",
-            "formatString": "\"₹\"\\ #,0.###############;#,0.###############\\ -\"₹\";\"₹\"\\ #,0.###############",
-            "lineageTag": "d11e3c51-9a98-4ea0-9a43-d7f40ad0e5ae",
-            "sourceColumn": "gross_sales_amount",
-            "summarizeBy": "sum"
+            "expression": [
+              "",
+              "VAR res = ",
+              "CALCULATE(MAX(post_invoice_deductions[discounts_pct]),RELATEDTABLE(post_invoice_deductions))",
+              "RETURN res*fact_actual_estimates[net_invoice_sales_amount]"
+            ],
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "isDataTypeInferred": true,
+            "lineageTag": "e146e0f2-00dc-485a-8d4f-af59f0fc273d",
+            "summarizeBy": "sum",
+            "type": "calculated"
+          },
+          {
+            "name": "Post_invoice_other_Deduction_amount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "decimal",
+            "expression": [
+              "",
+              "VAR res = ",
+              "CALCULATE(MAX(post_invoice_deductions[other_deductions_pct]),RELATEDTABLE(post_invoice_deductions))",
+              "RETURN res*fact_actual_estimates[net_invoice_sales_amount]"
+            ],
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "isDataTypeInferred": true,
+            "lineageTag": "ddec0757-2d37-4789-a2d5-74337aa7bd4e",
+            "summarizeBy": "sum",
+            "type": "calculated"
+          },
+          {
+            "name": "net_sales_amount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "decimal",
+            "expression": [
+              "",
+              "[net_invoice_sales_amount] - [Post_invoice_Deduct] - [Post_invoice_other_Deduction_amount]"
+            ],
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "isDataTypeInferred": true,
+            "lineageTag": "b1ed8a2a-067d-4e62-991e-95292ff7da07",
+            "summarizeBy": "sum",
+            "type": "calculated"
+          },
+          {
+            "name": "manufacturing cost",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "double",
+            "expression": [
+              "",
+              "VAR res = ",
+              "CALCULATE(MAX(manufacturing_cost[manufacturing_cost]),RELATEDTABLE(manufacturing_cost))",
+              "RETURN res*fact_actual_estimates[quantity]"
+            ],
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "isDataTypeInferred": true,
+            "lineageTag": "07cefcb0-b808-40f7-8e95-84b1063dfb28",
+            "summarizeBy": "sum",
+            "type": "calculated"
+          },
+          {
+            "name": "Freight_cost",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "decimal",
+            "expression": [
+              "",
+              "VAR res = ",
+              "CALCULATE(MAX(freight_cost[freight_pct]),RELATEDTABLE(freight_cost))",
+              "RETURN res*fact_actual_estimates[net_sales_amount]"
+            ],
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "isDataTypeInferred": true,
+            "lineageTag": "60342267-c04c-4a13-8033-042f51c21810",
+            "summarizeBy": "sum",
+            "type": "calculated"
+          },
+          {
+            "name": "other_cost",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "decimal",
+            "expression": [
+              "",
+              "VAR res = ",
+              "CALCULATE(MAX(freight_cost[other_cost_pct]),RELATEDTABLE(freight_cost))",
+              "RETURN res*fact_actual_estimates[net_sales_amount]"
+            ],
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "isDataTypeInferred": true,
+            "lineageTag": "2210a214-ecd9-44a9-b18b-848d2fff9904",
+            "summarizeBy": "sum",
+            "type": "calculated"
           }
         ],
         "lineageTag": "f44dc5c2-7606-4063-86ff-4ca2b49240c5",
@@ -1298,11 +1382,50 @@
                 "    #\"Added pre_invoice_discount_amt\" = Table.AddColumn(#\"Changed Type3\", \"pre_invoice_discount_amount\", each [gross_sales_amount] * [pre_invoice_discount_pct]),",
                 "    #\"Changed Type4\" = Table.TransformColumnTypes(#\"Added pre_invoice_discount_amt\",{{\"pre_invoice_discount_amount\", Currency.Type}}),",
                 "    #\"Added net_inv_sales_amt\" = Table.AddColumn(#\"Changed Type4\", \"net_invoice_sales_amount\", each [gross_sales_amount] - [pre_invoice_discount_amount]),",
-                "    #\"Changed Type5\" = Table.TransformColumnTypes(#\"Added net_inv_sales_amt\",{{\"net_invoice_sales_amount\", Currency.Type}})",
+                "    #\"Changed Type5\" = Table.TransformColumnTypes(#\"Added net_inv_sales_amt\",{{\"net_invoice_sales_amount\", Currency.Type}}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type5\",{\"gross_sales_amount\", \"pre_invoice_discount_pct\", \"pre_invoice_discount_amount\"})",
                 "in",
-                "    #\"Changed Type5\""
+                "    #\"Removed Columns\""
               ],
               "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "fiscal_year",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "7908a0bea128495d8f229e85cfed448d"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Fiscal Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "isNameInferred": true,
+            "lineageTag": "9d2d7a5b-aef8-4531-9f2a-9c096e13eb43",
+            "sourceColumn": "dim_date[Fiscal Year]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "685c9c8c-a542-48ff-84df-ea54916949fd",
+        "partitions": [
+          {
+            "name": "fiscal_year",
+            "mode": "import",
+            "source": {
+              "expression": "ALLNOBLANKROW(dim_date[Fiscal Year])",
+              "type": "calculated"
             }
           }
         ]
