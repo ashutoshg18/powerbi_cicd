@@ -12,7 +12,7 @@
       },
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"dim_customer\",\"dim_market\",\"dim_product\",\"fact_sales_monthly\",\"fact_forecast_monthly\",\"fact_actual_estimates\",\"freight_cost\",\"gross_price\",\"manufacturing_cost\",\"post_invoice_deductions\",\"pre_invoice_deductions\",\"dim_date\",\"remaining_forecast\",\"last_sales_month\"]"
+        "value": "[\"dim_customer\",\"dim_market\",\"dim_product\",\"fact_sales_monthly\",\"fact_forecast_monthly\",\"fact_actual_estimates\",\"freight_cost\",\"gross_price\",\"manufacturing_cost\",\"post_invoice_deductions\",\"pre_invoice_deductions\",\"dim_date\",\"remaining_forecast\",\"last_sales_month\",\"_Measure\",\"p&l rows\"]"
       },
       {
         "name": "PBI_ProTooling",
@@ -1235,7 +1235,7 @@
             "summarizeBy": "sum"
           },
           {
-            "name": "Post_invoice_Deduct",
+            "name": "Post_invoice_Deduction_amount",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -1287,7 +1287,7 @@
             "dataType": "decimal",
             "expression": [
               "",
-              "[net_invoice_sales_amount] - [Post_invoice_Deduct] - [Post_invoice_other_Deduction_amount]"
+              "[net_invoice_sales_amount] - [Post_invoice_Deduction_amount] - [Post_invoice_other_Deduction_amount]"
             ],
             "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
             "isDataTypeInferred": true,
@@ -1357,6 +1357,24 @@
             "lineageTag": "2210a214-ecd9-44a9-b18b-848d2fff9904",
             "summarizeBy": "sum",
             "type": "calculated"
+          },
+          {
+            "name": "gross_sales_amount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-IN\"}"
+              }
+            ],
+            "dataType": "decimal",
+            "formatString": "\"₹\"\\ #,0.###############;#,0.###############\\ -\"₹\";\"₹\"\\ #,0.###############",
+            "lineageTag": "1d281db8-16f5-4f44-85ea-49d30f6ba067",
+            "sourceColumn": "gross_sales_amount",
+            "summarizeBy": "sum"
           }
         ],
         "lineageTag": "f44dc5c2-7606-4063-86ff-4ca2b49240c5",
@@ -1383,7 +1401,7 @@
                 "    #\"Changed Type4\" = Table.TransformColumnTypes(#\"Added pre_invoice_discount_amt\",{{\"pre_invoice_discount_amount\", Currency.Type}}),",
                 "    #\"Added net_inv_sales_amt\" = Table.AddColumn(#\"Changed Type4\", \"net_invoice_sales_amount\", each [gross_sales_amount] - [pre_invoice_discount_amount]),",
                 "    #\"Changed Type5\" = Table.TransformColumnTypes(#\"Added net_inv_sales_amt\",{{\"net_invoice_sales_amount\", Currency.Type}}),",
-                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type5\",{\"gross_sales_amount\", \"pre_invoice_discount_pct\", \"pre_invoice_discount_amount\"})",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type5\",{\"pre_invoice_discount_pct\", \"pre_invoice_discount_amount\"})",
                 "in",
                 "    #\"Removed Columns\""
               ],
@@ -1426,6 +1444,302 @@
             "source": {
               "expression": "ALLNOBLANKROW(dim_date[Fiscal Year])",
               "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "_Measure",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "lineageTag": "1e613a82-0af2-426d-88a2-c2a64d1b97eb",
+        "measures": [
+          {
+            "name": "GS $",
+            "expression": [
+              "",
+              "SUM(fact_actual_estimates[gross_sales_amount])"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "be08c449-6c7d-44e3-a3bd-072e5e3cef87"
+          },
+          {
+            "name": "NIS $",
+            "expression": [
+              "",
+              "SUM(fact_actual_estimates[net_invoice_sales_amount])"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "72be05e2-04e5-49c2-9f09-bc60af06b277"
+          },
+          {
+            "name": "NIS Ind $",
+            "expression": [
+              "",
+              "CALCULATE( [NIS $], dim_market[market] = \"India\")"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "4d6f07ed-5753-4537-9da7-a5e16c4b2060"
+          },
+          {
+            "name": "Benchmark Vs Market",
+            "expression": [
+              "",
+              "[NIS $] - [NIS Ind $]"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "84e20b06-7af6-40f3-802a-81cffb68da25"
+          },
+          {
+            "name": "NIS LY $",
+            "expression": [
+              "",
+              "CALCULATE([NIS $], SAMEPERIODLASTYEAR(dim_date[Date]))"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "8ee4044d-bf4a-4496-bb5e-a0eed80ad627"
+          },
+          {
+            "name": "PID $",
+            "expression": [
+              "",
+              "[GS $] - [NIS $]"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "eedc9647-eabd-41ec-96f2-dc2e86dee34f"
+          },
+          {
+            "name": "POID $",
+            "expression": [
+              "",
+              "SUM(fact_actual_estimates[Post_invoice_Deduction_amount])"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "a1870d89-143c-4a4e-b7ce-55e0dd8f8f81"
+          },
+          {
+            "name": "POID Other Ded $",
+            "expression": [
+              "",
+              "SUM(fact_actual_estimates[Post_invoice_other_Deduction_amount])"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "9eb67942-0d9c-44db-98cf-17fb90516ba4"
+          },
+          {
+            "name": "Total Post Invoice Deduction $",
+            "expression": [
+              "",
+              "[POID $] + [POID Other Ded $]"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "fbecbee2-49e1-45aa-a1f5-1e07bbf4fe46"
+          },
+          {
+            "name": "Net Sales",
+            "expression": [
+              "",
+              "SUM(fact_actual_estimates[net_sales_amount])"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "61d7680f-59e5-40de-9a97-5367cd16e82a"
+          },
+          {
+            "name": "Mfg Cost $",
+            "expression": [
+              "",
+              "SUM(fact_actual_estimates[manufacturing cost])"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "0ae29f50-0325-4ad1-9eaa-d4ad540e7158"
+          },
+          {
+            "name": "Freight Cost $",
+            "expression": [
+              "",
+              "SUM(fact_actual_estimates[Freight_cost])"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "0cf9802b-d97d-4534-b4c3-5334c6c347d6"
+          },
+          {
+            "name": "Total COGS $",
+            "expression": [
+              "",
+              "[Mfg Cost $] + [Freight Cost $] + [Other Cost $]"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "55a6fc12-613e-482f-85dc-fbef02c2c5fe"
+          },
+          {
+            "name": "Other Cost $",
+            "expression": [
+              "",
+              "SUM(fact_actual_estimates[other_cost])"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "c4f830cb-65e9-4a5a-97af-b46741c521fa"
+          },
+          {
+            "name": "GM $",
+            "expression": [
+              "",
+              "[Net Sales] - [Total COGS $]"
+            ],
+            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "lineageTag": "aea49f35-de99-4093-b655-82ce5df938c3"
+          },
+          {
+            "name": "P & L values",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "SWITCH(",
+              "    TRUE(),",
+              "    MAX('p&l rows'[Order]) = 1, [GS $],",
+              "    MAX('p&l rows'[Order]) = 2, [PID $],",
+              "    MAX('p&l rows'[Order]) = 3, [NIS $],",
+              "    MAX('p&l rows'[Order]) = 4, [POID $],",
+              "    MAX('p&l rows'[Order]) = 5, [POID Other Ded $],",
+              "    MAX('p&l rows'[Order]) = 6, [Total Post Invoice Deduction $],",
+              "    MAX('p&l rows'[Order]) = 7, [Net Sales],",
+              "    MAX('p&l rows'[Order]) = 8, [Mfg Cost $],",
+              "    MAX('p&l rows'[Order]) = 9, [Freight Cost $],",
+              "    MAX('p&l rows'[Order]) = 10, [Other Cost $],",
+              "    MAX('p&l rows'[Order]) = 11, [Total COGS $],",
+              "    MAX('p&l rows'[Order]) = 12, [GM $],",
+              "    MAX('p&l rows'[Order]) = 13, [GM %],",
+              "    MAX('p&l rows'[Order]) = 14, [GM / Unit]",
+              ")"
+            ],
+            "lineageTag": "e35b711b-6265-4566-92a8-dd71c4a563c4"
+          },
+          {
+            "name": "GM %",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "[GM $] / [Net Sales]"
+            ],
+            "lineageTag": "19b5361f-776d-4351-acce-c521be3a1575"
+          },
+          {
+            "name": "GM / Unit",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "[GM $] / SUM(fact_actual_estimates[quantity])"
+            ],
+            "lineageTag": "462830bb-7323-4224-9ea6-39c6adc227c1"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "_Measure",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i44FAA==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Column1\", type text}}),",
+                "    #\"Removed Columns\" = Table.RemoveColumns(#\"Changed Type\",{\"Column1\"})",
+                "in",
+                "    #\"Removed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "p&l rows",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Description",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "31991883-288d-450e-beca-2a4a6f2bf8d8",
+            "sourceColumn": "Description",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Order",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "bb5af9e1-51b7-479d-8fb9-4f717a608061",
+            "sourceColumn": "Order",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Line Item",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "SortByColumn"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4af81f0e-823d-45c4-be1d-e56ba4a1b3b5",
+            "sortByColumn": "Order",
+            "sourceColumn": "Line Item",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "98ca3e58-0d68-4f83-811e-b3117d5e0061",
+        "partitions": [
+          {
+            "name": "p&l rows",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"fZFLC8IwEIT/ylLwpmh9e1YUD7WCeio9hBprQBJIUn+/m23ThxYPc5n9JtlhkyQ4aGUMXNiLm2AYhKi2kw6T4Kw5HOVbiYzDjt+LzAolkZui+mcudeK2nvjXZ6hfn/5QprF3wmSqkBbpOWoENPVuT0DZJ9ed3RatnLfL4FVZ9oLuf63gEvUX8d18p1XVqekSMVk8WGYLLWQOW3wGkTUt1DNyib3mIn9az26I7ZiOiqllxYQTglpeU24bHy4OCesu5DigvG3EdC5c23Ba37vyviEYOGz2haFLYARjuElBC7lTNUaafgA=\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Description = _t, Order = _t, #\"Line Item\" = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Description\", type text}, {\"Order\", Int64.Type}, {\"Line Item\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
             }
           }
         ]
