@@ -149,6 +149,32 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1400,
+            "y": 573.5
+          },
+          "nodeIndex": "_Measure",
+          "nodeLineageTag": "1e613a82-0af2-426d-88a2-c2a64d1b97eb",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1561.25,
+            "y": 549.5
+          },
+          "nodeIndex": "p&l rows",
+          "nodeLineageTag": "98ca3e58-0d68-4f83-811e-b3117d5e0061",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",
