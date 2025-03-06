@@ -4,7 +4,7 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 0,
+        "x": 6.5,
         "y": 26.25
       },
       "nodes": [
@@ -55,19 +55,6 @@
           "nodeLineageTag": "7fc6c03a-c081-4fad-81fb-975bea0d4d39",
           "size": {
             "height": 224,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
-            "x": 842.66666666666652,
-            "y": 499.58333333333337
-          },
-          "nodeIndex": "fact_sales_monthly",
-          "nodeLineageTag": "8d8868f0-acd6-4d1b-8d6e-3cc1e3b18030",
-          "size": {
-            "height": 172.5,
             "width": 234
           },
           "zIndex": 0
@@ -172,6 +159,44 @@
           "nodeLineageTag": "98ca3e58-0d68-4f83-811e-b3117d5e0061",
           "size": {
             "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1722.5,
+            "y": 525.5
+          },
+          "nodeIndex": "P&L Columns",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 843.75,
+            "y": 1267.5
+          },
+          "nodeIndex": "Operational Expense",
+          "nodeLineageTag": "f3a189ae-5aa6-461d-98d4-fa7e439cb751",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1883.75,
+            "y": 669.75
+          },
+          "nodeIndex": "last_sales_month",
+          "nodeLineageTag": "1b1d87f2-947e-4de9-baa0-6c18009c110f",
+          "size": {
+            "height": 104,
             "width": 234
           },
           "zIndex": 0
