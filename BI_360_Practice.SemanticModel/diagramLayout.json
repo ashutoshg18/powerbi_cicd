@@ -61,19 +61,6 @@
         },
         {
           "location": {
-            "x": 842.66666666666652,
-            "y": 499.58333333333337
-          },
-          "nodeIndex": "fact_sales_monthly",
-          "nodeLineageTag": "8d8868f0-acd6-4d1b-8d6e-3cc1e3b18030",
-          "size": {
-            "height": 172.5,
-            "width": 234
-          },
-          "zIndex": 0
-        },
-        {
-          "location": {
             "x": 834.5,
             "y": 288.75
           },
