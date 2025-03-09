@@ -12054,11 +12054,17 @@
           },
           {
             "name": "Net Sales",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
             "expression": [
               "",
               "SUM(fact_actual_estimates[net_sales_amount])"
             ],
-            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
             "lineageTag": "61d7680f-59e5-40de-9a97-5367cd16e82a"
           },
           {
@@ -12072,11 +12078,17 @@
           },
           {
             "name": "Freight Cost $",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
             "expression": [
               "",
               "SUM(fact_actual_estimates[Freight_cost])"
             ],
-            "formatString": "\\$#,0.###############;(\\$#,0.###############);\\$#,0.###############",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
             "lineageTag": "0cf9802b-d97d-4534-b4c3-5334c6c347d6"
           },
           {
@@ -12434,16 +12446,11 @@
           },
           {
             "name": "Forecast Accuracy % LY",
-            "annotations": [
-              {
-                "name": "PBI_FormatHint",
-                "value": "{\"isGeneralNumber\":true}"
-              }
-            ],
             "expression": [
               "",
               "CALCULATE([Forecast Accuracy %], SAMEPERIODLASTYEAR(dim_date[Date]))"
             ],
+            "formatString": "0.00%;-0.00%;0.00%",
             "lineageTag": "0034b06d-308a-4be2-81af-d77eb063c58c"
           },
           {
@@ -12453,6 +12460,80 @@
               "IF([Net Error] > 0, \"Excess Inventory\", IF([Net Error] < 0, \"Out of Stock\", BLANK()))"
             ],
             "lineageTag": "4c5ca811-bc22-448d-9fff-ece352b781b1"
+          },
+          {
+            "name": "Top / Bottom N Title",
+            "expression": [
+              "",
+              "\"Top / Bottom Products & Customers by \" & SELECTEDVALUE('p&l rows'[Description])"
+            ],
+            "lineageTag": "debe132a-e818-48d9-a711-97cd65670c64"
+          },
+          {
+            "name": "Net Error % LY",
+            "expression": [
+              "",
+              "CALCULATE( [Net Error %], SAMEPERIODLASTYEAR(dim_date[Date]))"
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "lineageTag": "d742d3c5-e90b-4f3a-8775-39bf4b85cd43"
+          },
+          {
+            "name": "Net Sales LY",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "expression": [
+              "",
+              "CALCULATE([Net Sales], SAMEPERIODLASTYEAR(dim_date[Date]))"
+            ],
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "lineageTag": "1cfc1f8b-5399-4538-ba91-d039ec80f636"
+          },
+          {
+            "name": "GM % LY",
+            "expression": [
+              "",
+              "CALCULATE([GM %], SAMEPERIODLASTYEAR(dim_date[Date]))"
+            ],
+            "formatString": "0.00%;-0.00%;0.00%",
+            "lineageTag": "6c558213-ae12-4979-88b0-61d8bf8f7dbe"
+          },
+          {
+            "name": "Sales Qty LY",
+            "expression": [
+              "",
+              "CALCULATE([Sales Qty],SAMEPERIODLASTYEAR(dim_date[Date]))"
+            ],
+            "formatString": "0",
+            "lineageTag": "d884577b-d8f2-4983-923a-fb93ab2fac0b"
+          },
+          {
+            "name": "Forecast Qty LY",
+            "expression": [
+              "",
+              "CALCULATE([Forecast Qty],SAMEPERIODLASTYEAR(dim_date[Date]))"
+            ],
+            "formatString": "0",
+            "lineageTag": "5be6eaf8-93a2-4500-b243-ca3525d4a7bf"
+          },
+          {
+            "name": "Freight Cost LY",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"en-US\"}"
+              }
+            ],
+            "expression": [
+              "",
+              "CALCULATE([Freight Cost $], SAMEPERIODLASTYEAR(dim_date[Date]))"
+            ],
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "lineageTag": "91acdca4-26c3-41d0-989c-fb6c163480d1"
           }
         ],
         "partitions": [
